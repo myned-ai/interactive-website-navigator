@@ -2,8 +2,6 @@
 
 **Embeddable 3D Avatar Chat Widget** - Real-time Voice & Text Chat with Gaussian Splatting Avatar Animation.
 
-[![npm version](https://img.shields.io/npm/v/@myned-ai/avatar-chat-widget.svg)](https://www.npmjs.com/package/@myned-ai/avatar-chat-widget)
-
 > **Next-Gen Engagement:** Replace static chatbots with a living, breathing 3D avatar that talks to your visitors.
 
 ## ✨ Features
