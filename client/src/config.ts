@@ -115,7 +115,7 @@ const DEFAULT_CONFIG: AppConfig = {
     // Default to local paths (works in dev mode)
     // CDN usage will auto-detect and override this in widget.ts init()
     baseUrl: '',  // Empty = use root path (works with Vite's public folder)
-    defaultAvatarPath: '/asset/nyx.zip',
+    defaultAvatarPath: 'asset/nyx.zip',
   },
 };
 

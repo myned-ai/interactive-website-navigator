@@ -340,7 +340,7 @@ class AvatarChatElement extends HTMLElement {
 
     // No avatarUrl provided, use default with detected or configured base
     const baseUrl = this.config.assetsBaseUrl || detectAssetsBaseUrl();
-    const defaultPath = '/asset/nyx.zip';
+    const defaultPath = 'asset/nyx.zip';
 
     if (baseUrl) {
       return `${baseUrl.replace(/\/$/, '')}${defaultPath}`;
@@ -1099,7 +1099,7 @@ export const AvatarChat = {
       }
     }
     // Fallback for npm usage or local development
-    return '/asset/nyx.zip';
+    return 'asset/nyx.zip';
   },
 
   /**
@@ -1210,7 +1210,7 @@ export const AvatarChat = {
 
     // Auto-detect assets base URL if not provided
     if (config.assetsBaseUrl) {
-      setConfig({ assets: { baseUrl: config.assetsBaseUrl, defaultAvatarPath: '/asset/nyx.zip' } });
+      setConfig({ assets: { baseUrl: config.assetsBaseUrl, defaultAvatarPath: 'asset/nyx.zip' } });
     } else {
       // Auto-detect from script tag
       const scripts = document.getElementsByTagName('script');
@@ -1218,12 +1218,12 @@ export const AvatarChat = {
         const src = scripts[i].src;
         if (src.includes('jsdelivr.net') && src.includes('avatar-chat-widget')) {
           const baseUrl = src.substring(0, src.lastIndexOf('/'));
-          setConfig({ assets: { baseUrl: `${baseUrl}/public`, defaultAvatarPath: '/asset/nyx.zip' } });
+          setConfig({ assets: { baseUrl: `${baseUrl}/public`, defaultAvatarPath: 'asset/nyx.zip' } });
           break;
         }
         if (src.includes('unpkg.com') && src.includes('avatar-chat-widget')) {
           const baseUrl = src.substring(0, src.lastIndexOf('/'));
-          setConfig({ assets: { baseUrl: `${baseUrl}/public`, defaultAvatarPath: '/asset/nyx.zip' } });
+          setConfig({ assets: { baseUrl: `${baseUrl}/public`, defaultAvatarPath: 'asset/nyx.zip' } });
           break;
         }
       }

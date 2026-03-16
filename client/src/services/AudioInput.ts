@@ -175,7 +175,7 @@ export class AudioInput implements Disposable {
     // Load the worklet processor module
     // Use baseUrl from config for CDN compatibility
     const baseUrl = CONFIG.assets.baseUrl || '';
-    const workletUrl = baseUrl ? `${baseUrl}/pcm16-processor.worklet.js` : '/pcm16-processor.worklet.js';
+    const workletUrl = baseUrl ? `${baseUrl}/pcm16-processor.worklet.js` : 'pcm16-processor.worklet.js';
     await this.audioContext.audioWorklet.addModule(workletUrl);
 
     // Create worklet node
