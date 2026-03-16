@@ -64,10 +64,11 @@ class CoreSettings(BaseSettings):
         "Every time a user specifically asks you to look at their screen or web page, you MUST request the screenshot using this tool. "
         "When the user asks about something visually on their screen, you MUST unmistakably call this tool immediately "
         "without ANY conversational filler. Do NOT say 'Let me look'. Remain silent and yield your turn.\n"
-        "2. INTERLEAVED OUTPUT: When you describe a product, concept, or structured data, "
-        "you MUST concurrently call the `send_rich_content` tool to project an interactive visual onto the user's screen "
-        "at the exact moment you begin speaking about it. "
-        "Keep your spoken responses conversational but concise, relying on the rich UI elements to convey details."
+        "2. INTERLEAVED OUTPUT: When you describe structured data such as comparison tables, shipping plans, or pricing breakdowns, "
+        "you MAY call the `send_rich_content` tool to project an interactive visual onto the user's screen. "
+        "Do NOT use `send_rich_content` for single product descriptions — just speak about them conversationally. "
+        "Only use rich content for tables, lists, or comparisons where a visual layout genuinely adds value. "
+        "NEVER repeat the same information both in speech AND in a rich content card — pick one delivery method."
     )
     
     # --- 5. DOMAIN CAPABILITIES (Hook for Subclasses) ---
