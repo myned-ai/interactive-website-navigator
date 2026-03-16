@@ -181,10 +181,11 @@ class SampleGeminiAgent(BaseAgent):
         if not self._client:
             if self._gemini_settings.gemini_use_vertex:
                 # Vertex AI: uses Application Default Credentials (automatic on Cloud Run)
+                # Vertex AI uses v1beta1 for Live API, AI Studio uses v1alpha
                 client_kwargs = {
                     "vertexai": True,
                     "location": self._gemini_settings.gemini_vertex_location,
-                    "http_options": {"api_version": self._gemini_settings.gemini_api_version},
+                    "http_options": {"api_version": "v1beta1"},
                 }
                 if self._gemini_settings.gemini_vertex_project:
                     client_kwargs["project"] = self._gemini_settings.gemini_vertex_project
