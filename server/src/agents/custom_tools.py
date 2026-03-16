@@ -8,8 +8,10 @@ GEMINI_CUSTOM_ACTIONS = [
         "name": "rotate_3d_model",
         "description": (
             "Rotate the 3D product model in the viewer to show a specific angle.\n"
-            "**Invocation Condition:** Invoke this tool when the user asks to see the back, side, "
-            "top, or bottom of the product, or explicitly asks to rotate it."
+            "**Invocation Condition:** Invoke this tool ONLY when the user asks to see the back, side, "
+            "top, or bottom of the product, or explicitly asks to rotate it, AND the most recent "
+            "'viewing_product' event has `has3dModel: true`. If `has3dModel` is false or missing, "
+            "do NOT call this tool."
         ),
         "parameters": {
             "type": "OBJECT",

@@ -1269,7 +1269,12 @@
       card.addEventListener('click', () => {
         document.querySelectorAll('.product-card').forEach(c => c.classList.remove('active'));
         card.classList.add('active');
-        const data = { name: card.dataset.name, price: +card.dataset.price, sku: card.dataset.sku, category: card.dataset.category };
+        const modelPaths = {
+          'NK-AM-001': 'asset/models/shoe.glb',
+          'SN-WH-XM5': 'asset/models/headphones.glb'
+        };
+        const has3dModel = !!modelPaths[card.dataset.sku];
+        const data = { name: card.dataset.name, price: +card.dataset.price, sku: card.dataset.sku, category: card.dataset.category, has3dModel };
         
         // Show product details
         const detailsContainer = document.getElementById('product-details');
@@ -1281,10 +1286,6 @@
           document.getElementById('pd-price').textContent = '$' + card.dataset.price;
           
           if (viewer) {
-            const modelPaths = {
-              'NK-AM-001': 'asset/models/shoe.glb',
-              'SN-WH-XM5': 'asset/models/headphones.glb'
-            };
             const no3d = document.getElementById('no-3d-model');
             const modelPath = modelPaths[data.sku];
             if (modelPath) {

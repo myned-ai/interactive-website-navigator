@@ -729,6 +729,15 @@ class SampleGeminiAgent(BaseAgent):
             )
         else:
             event_str = f"SYSTEM EVENT: '{name}' occurred on the client."
+
+        # Add a strong contextual hint for product selection events
+        if name == "viewing_product":
+            event_str = (
+                "SYSTEM EVENT: The user just clicked and selected a product on the page. "
+                "This is now the CURRENT PRODUCT the user is looking at. "
+                "If the user's next question is about a product (e.g. 'tell me about this', 'how much?', 'is it good?'), "
+                "it refers to THIS product. Use this data to answer — do NOT call request_screen_context."
+            )
             
         # PROMPT INJECTION DEFENSE:
         # Validate data is a dictionary and force-cast to string schema to strip execution attempts
@@ -815,7 +824,12 @@ class SampleGeminiAgent(BaseAgent):
 
         # Send text to context without triggering a turn response if it's just meant to be silent context
         # (This avoids triggering audio_start on the client, which would clear suggestion chips)
-        end_of_turn = (directive != "context")
+        # EXCEPTION: viewing_product uses end_of_turn=True so Gemini deeply processes the product data
+        # into its context window. The suppression flag ensures the response never reaches the client.
+        if name == "viewing_product":
+            end_of_turn = True
+        else:
+            end_of_turn = (directive != "context")
         
         # Activate suppression for context events — if Gemini still generates a response despite
         # end_of_turn=False, we must suppress it so the client doesn't hear an unwanted reply.
