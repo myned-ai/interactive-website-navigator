@@ -36,6 +36,7 @@ class GeminiSettings(BaseSettings):
     gemini_vertex_location: str = "us-central1"  # Vertex AI region (Live API availability)
     gemini_api_version: str = "v1alpha"
     gemini_model: str = "gemini-2.5-flash-native-audio-preview-12-2025"
+    gemini_vertex_model: str = "gemini-live-2.5-flash-native-audio"
     gemini_voice: Literal["Puck", "Charon", "Kore", "Fenrir", "Aoede", "Leda", "Orus", "Zephyr"] = "Kore"
     # Thinking budget: 0=disabled, -1=dynamic, 1-32768=fixed token budget
     gemini_thinking_budget: int = -1

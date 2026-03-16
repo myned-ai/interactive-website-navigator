@@ -45,6 +45,11 @@
       "value": "gemini-2.5-flash-native-audio-preview-12-2025",
       "required": false
     },
+    "GEMINI_VERTEX_MODEL": {
+      "description": "Gemini model name for Vertex AI (different naming convention).",
+      "value": "gemini-live-2.5-flash-native-audio",
+      "required": false
+    },
     "GEMINI_VOICE": {
       "description": "Gemini voice.",
       "value": "Kore",

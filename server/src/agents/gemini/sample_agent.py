@@ -223,7 +223,12 @@ class SampleGeminiAgent(BaseAgent):
         Uses `async with` to ensure proper resource management.
         Auto-reconnects if the session closes unexpectedly.
         """
-        model_id = self._gemini_settings.gemini_model
+        # Use Vertex AI model name when using Vertex AI, AI Studio model name otherwise
+        model_id = (
+            self._gemini_settings.gemini_vertex_model
+            if self._gemini_settings.gemini_use_vertex
+            else self._gemini_settings.gemini_model
+        )
 
         logger.info(f"Starting connection loop for model: {model_id}")
 
