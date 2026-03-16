@@ -824,12 +824,7 @@ class SampleGeminiAgent(BaseAgent):
 
         # Send text to context without triggering a turn response if it's just meant to be silent context
         # (This avoids triggering audio_start on the client, which would clear suggestion chips)
-        # EXCEPTION: viewing_product uses end_of_turn=True so Gemini deeply processes the product data
-        # into its context window. The suppression flag ensures the response never reaches the client.
-        if name == "viewing_product":
-            end_of_turn = True
-        else:
-            end_of_turn = (directive != "context")
+        end_of_turn = (directive != "context")
         
         # Activate suppression for context events — if Gemini still generates a response despite
         # end_of_turn=False, we must suppress it so the client doesn't hear an unwanted reply.

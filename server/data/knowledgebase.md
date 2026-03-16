@@ -19,17 +19,17 @@ To cut through the noise and make premium tech accessible. No filler products, n
 
 ## Product Catalog
 
-| Product | Price | SKU | Category |
-|---|---|---|---|
-| Nike AI Max | $120 | NK-AM-001 | Footwear |
-| Sony WH-1000XM5 | $349 | SN-WH-XM5 | Audio |
-| Apple Watch Ultra | $799 | AP-WU-002 | Wearables |
-| MacBook Pro M3 | $1,999 | AP-MBP-M3 | Laptops |
-| Logitech MX Master 3S | $99 | LT-MX-3S | Peripherals |
-| Keychron Q6 Pro | $189 | KC-Q6-PRO | Peripherals |
-| iPad Pro M4 | $999 | AP-IPAD-M4 | Tablets |
-| Nintendo Switch OLED | $349 | NT-SW-OLED | Gaming |
-| Dyson Airwrap | $599 | DY-AIR-01 | Personal Care |
+| Product | Price | SKU | Category | 3D Model |
+|---|---|---|---|---|
+| Nike AI Max | $120 | NK-AM-001 | Footwear | Yes |
+| Sony WH-1000XM5 | $349 | SN-WH-XM5 | Audio | Yes |
+| Apple Watch Ultra | $799 | AP-WU-002 | Wearables | No |
+| MacBook Pro M3 | $1,999 | AP-MBP-M3 | Laptops | No |
+| Logitech MX Master 3S | $99 | LT-MX-3S | Peripherals | No |
+| Keychron Q6 Pro | $189 | KC-Q6-PRO | Peripherals | No |
+| iPad Pro M4 | $999 | AP-IPAD-M4 | Tablets | No |
+| Nintendo Switch OLED | $349 | NT-SW-OLED | Gaming | No |
+| Dyson Airwrap | $599 | DY-AIR-01 | Personal Care | No |
 
 ## Shipping & Protection Plans
 
