@@ -6,7 +6,7 @@ Best Practice (Gemini Live): Each tool includes an **Invocation Condition:** blo
 to tell the model precisely when to invoke it.
 """
 
-from .custom_tools import GEMINI_CUSTOM_ACTIONS, OPENAI_CUSTOM_ACTIONS
+from .custom_tools import GEMINI_CUSTOM_ACTIONS
 
 # Gemini Function Declaration format using plain dictionaries for Live API config
 _CORE_GEMINI_ACTIONS = [
@@ -89,80 +89,3 @@ _CORE_GEMINI_ACTIONS = [
 GEMINI_NYX_ACTIONS = {
     "function_declarations": _CORE_GEMINI_ACTIONS + GEMINI_CUSTOM_ACTIONS
 }
-
-# OpenAI Realtime format
-_CORE_OPENAI_ACTIONS = [
-    {
-        "type": "function",
-        "name": "trigger_confetti",
-        "description": (
-            "Trigger a celebratory confetti blast on the user's screen.\n"
-            "**Invocation Condition:** Invoke this tool when the user explicitly asks for confetti, "
-            "is celebrating a success or achievement, or asks for something fun or festive."
-        ),
-        "parameters": {
-            "type": "object",
-            "properties": {}
-        }
-    },
-    {
-        "type": "function",
-        "name": "navigate_to_section",
-        "description": (
-            "Scroll the user's page to a specific named section.\n"
-            "**Invocation Condition:** Invoke this tool when the user asks to navigate to, see, "
-            "or go to a specific section of the page. Use section IDs from the initialization context "
-            "(e.g. 'pricing', 'features', 'contact_us'). If no sections were provided, "
-            "you may attempt common IDs like 'top', 'bottom', 'contact'.\n"
-            "**CRITICAL RULE:** Do NOT verbally announce that you are navigating, scrolling, or taking them there. "
-            "Just execute the action silently or incorporate it smoothly into your answer without mentioning the act of navigation."
-        ),
-        "parameters": {
-            "type": "object",
-            "properties": {
-                "section_id": {"type": "string", "description": "The section to navigate to"}
-            },
-            "required": ["section_id"]
-        }
-    },
-    {
-        "type": "function",
-        "name": "send_rich_content",
-        "description": (
-            "Send a rich interactive element directly into the user's chat widget. "
-            "Use this for complex data, link cards, forms, or media.\n"
-            "**Invocation Condition:** Invoke this tool when describing a product, presenting "
-            "structured data, sharing a link, or any situation where a visual element enhances comprehension. "
-            "Call concurrently as you begin speaking. Ensure the payload is a valid JSON string."
-        ),
-        "parameters": {
-            "type": "object",
-            "properties": {
-                "item_id": {"type": "string", "description": "Unique ID for this content block"},
-                "content_type": {"type": "string", "description": "Content type (e.g. 'link_card', 'table', 'form')"},
-                "action": {"type": "string", "enum": ["replace", "append", "remove"]},
-                "payload_json": {"type": "string", "description": "Serialized JSON string with the element data"}
-            },
-            "required": ["item_id", "content_type", "payload_json"]
-        }
-    },
-    {
-        "type": "function",
-        "name": "request_screen_context",
-        "description": (
-            "Request a screenshot of the user's current screen/viewport.\n"
-            "**Invocation Condition:** Invoke this tool *immediately* when the user asks about something "
-            "visually on their screen, such as 'What am I looking at?', 'Help me fill this form', "
-            "or 'What does this page show?'. You MUST invoke this tool without ANY conversational filler. "
-            "Do NOT say 'Let me look' or 'Sure'. Remain unmistakably silent and yield your turn. "
-            "Only answer after you receive the image attachment.\n"
-            "**EXCEPTION:** Do NOT invoke this tool if you already know what the user is looking at from recent system events (e.g. 'viewing_product')."
-        ),
-        "parameters": {
-            "type": "object",
-            "properties": {}
-        }
-    }
-]
-
-OPENAI_NYX_ACTIONS = _CORE_OPENAI_ACTIONS + OPENAI_CUSTOM_ACTIONS

@@ -6,7 +6,6 @@ Combines AI agents for voice conversation with Wav2Arkit
 model for synchronized facial animation.
 
 Supports multiple agent backends:
-- sample_openai: OpenAI Realtime API
 - sample_gemini: Google Gemini Live API
 - remote: External agent service
 
@@ -79,7 +78,7 @@ app = FastAPI(
     
     ## Features
     
-    - **Voice AI**: OpenAI Realtime API for natural voice conversations
+    - **Voice AI**: Google Gemini Live API for natural voice conversations
     - **Facial Animation**: Wav2Arkit model for synchronized blendshapes
     - **WebSocket Streaming**: Real-time audio and animation data
     

@@ -177,18 +177,27 @@ class SampleGeminiAgent(BaseAgent):
 
         logger.info("Connecting to Gemini Live API")
 
-        # 1. Validate API Key
-        if not self._gemini_settings.gemini_api_key:
-            logger.error("GEMINI_API_KEY not found in settings")
-            raise ValueError("GEMINI_API_KEY is missing")
-
         # Initialize client if needed
         if not self._client:
-            # Use v1alpha to match working simple_gemini_test.py
-            self._client = Client(
-                api_key=self._gemini_settings.gemini_api_key,
-                http_options={"api_version": "v1alpha"}
-            )
+            if self._gemini_settings.gemini_use_vertex:
+                # Vertex AI: uses Application Default Credentials (automatic on Cloud Run)
+                client_kwargs = {
+                    "vertexai": True,
+                    "location": self._gemini_settings.gemini_vertex_location,
+                    "http_options": {"api_version": self._gemini_settings.gemini_api_version},
+                }
+                if self._gemini_settings.gemini_vertex_project:
+                    client_kwargs["project"] = self._gemini_settings.gemini_vertex_project
+                logger.info(f"Using Vertex AI (location={self._gemini_settings.gemini_vertex_location})")
+                self._client = Client(**client_kwargs)
+            else:
+                # API key mode (AI Studio)
+                if not self._gemini_settings.gemini_api_key:
+                    raise ValueError("GEMINI_API_KEY is required when not using Vertex AI")
+                self._client = Client(
+                    api_key=self._gemini_settings.gemini_api_key,
+                    http_options={"api_version": self._gemini_settings.gemini_api_version},
+                )
 
         # Create connection event to wait for successful connection
         self._connection_ready = asyncio.Event()

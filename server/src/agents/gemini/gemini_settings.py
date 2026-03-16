@@ -30,10 +30,13 @@ class GeminiSettings(BaseSettings):
     )
 
     # Gemini Configuration
-    gemini_api_key: str = ""
+    gemini_api_key: str = ""  # Optional: only needed when NOT using Vertex AI
+    gemini_use_vertex: bool = True  # Use Vertex AI (default) vs API key
+    gemini_vertex_project: str = ""  # GCP project ID (auto-detected on Cloud Run)
+    gemini_vertex_location: str = "europe-west1"  # Vertex AI region
     gemini_api_version: str = "v1alpha"
     gemini_model: str = "gemini-2.5-flash-native-audio-preview-12-2025"
-    gemini_voice: Literal["Puck", "Charon", "Kore", "Fenrir", "Aoede", "Leda", "Orus", "Zephyr"] = "Leda"
+    gemini_voice: Literal["Puck", "Charon", "Kore", "Fenrir", "Aoede", "Leda", "Orus", "Zephyr"] = "Kore"
     # Thinking budget: 0=disabled, -1=dynamic, 1-32768=fixed token budget
     gemini_thinking_budget: int = -1
     # Enable Google Search grounding for real-time information

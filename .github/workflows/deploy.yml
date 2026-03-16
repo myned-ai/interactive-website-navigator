@@ -1,0 +1,134 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+
+env:
+  PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  REGION: europe-west1
+  SERVICE_NAME: interactive-website-navigator
+  CLIENT_BUCKET: ${{ secrets.GCP_CLIENT_BUCKET }}
+
+jobs:
+  detect-changes:
+    runs-on: ubuntu-latest
+    outputs:
+      server: ${{ steps.changes.outputs.server }}
+      client: ${{ steps.changes.outputs.client }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Detect changed paths
+        id: changes
+        run: |
+          if git diff --name-only HEAD~1 HEAD | grep -q '^server/'; then
+            echo "server=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "server=false" >> "$GITHUB_OUTPUT"
+          fi
+          if git diff --name-only HEAD~1 HEAD | grep -q '^client/'; then
+            echo "client=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "client=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  deploy-server:
+    needs: detect-changes
+    if: needs.detect-changes.outputs.server == 'true'
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Configure Docker for Artifact Registry
+        run: gcloud auth configure-docker ${REGION}-docker.pkg.dev --quiet
+
+      - name: Build and push Docker image
+        run: |
+          IMAGE="${REGION}-docker.pkg.dev/${PROJECT_ID}/${SERVICE_NAME}/${SERVICE_NAME}"
+          docker build \
+            -t "${IMAGE}:${GITHUB_SHA::7}" \
+            -t "${IMAGE}:latest" \
+            -f server/Dockerfile \
+            server
+          docker push "${IMAGE}" --all-tags
+
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run deploy ${SERVICE_NAME} \
+            --image "${REGION}-docker.pkg.dev/${PROJECT_ID}/${SERVICE_NAME}/${SERVICE_NAME}:${GITHUB_SHA::7}" \
+            --region ${REGION} \
+            --platform managed \
+            --memory 2Gi \
+            --cpu 1 \
+            --port 8080 \
+            --allow-unauthenticated \
+            --min-instances 1 \
+            --max-instances 5 \
+            --set-env-vars "AUTH_SECRET_KEY=${{ secrets.GCP_AUTH_SECRET_KEY }},AUTH_ALLOWED_ORIGINS=https://storage.googleapis.com/${CLIENT_BUCKET}"
+
+  deploy-client:
+    needs: [detect-changes, deploy-server]
+    if: |
+      always() &&
+      needs.detect-changes.outputs.client == 'true' &&
+      needs.detect-changes.result == 'success' &&
+      (needs.deploy-server.result == 'success' || needs.deploy-server.result == 'skipped')
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Get Cloud Run URL
+        id: server-url
+        run: |
+          URL=$(gcloud run services describe ${SERVICE_NAME} \
+            --region ${REGION} \
+            --format 'value(status.url)')
+          WS_URL=$(echo "$URL" | sed 's/^https/wss/')/ws
+          echo "ws_url=${WS_URL}" >> "$GITHUB_OUTPUT"
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: client/package-lock.json
+
+      - name: Build client
+        working-directory: client
+        run: |
+          npm ci
+          VITE_WS_URL=${{ steps.server-url.outputs.ws_url }} npm run build
+
+      - name: Deploy to Cloud Storage
+        run: |
+          gsutil -m rsync -r -d client/dist gs://${CLIENT_BUCKET}
+          gsutil -m setmeta -h "Cache-Control:public, max-age=3600" gs://${CLIENT_BUCKET}/**

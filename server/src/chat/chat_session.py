@@ -748,7 +748,7 @@ class ChatSession:
             self.is_streaming_audio = True
             self.user_id = data.get("userId", "unknown")
             # Unstick session: If user starts speaking, previous interruption is over.
-            # This ensures we recover even if OpenAI errored out in the previous turn.
+            # This ensures we recover even if the agent errored out in the previous turn.
             self.is_interrupted = False
 
         elif msg_type == "audio":

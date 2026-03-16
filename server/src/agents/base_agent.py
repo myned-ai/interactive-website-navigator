@@ -39,7 +39,7 @@ class BaseAgent(ABC):
     def input_sample_rate(self) -> int:
         """
         Preferred input sample rate for this agent.
-        Defaults to 24000 (OpenAI standard).
+        Defaults to 24000.
         """
         return 24000
 
@@ -47,7 +47,7 @@ class BaseAgent(ABC):
     def output_sample_rate(self) -> int:
         """
         Preferred output sample rate for this agent.
-        Defaults to 24000 (OpenAI standard).
+        Defaults to 24000.
         """
         return 24000
 

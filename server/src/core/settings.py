@@ -5,7 +5,7 @@ Centralized configuration using Pydantic Settings for type-safe
 environment variable management with validation.
 
 This module contains ONLY vendor-agnostic settings.
-Vendor-specific settings (OpenAI, Gemini) are managed by their respective agents.
+Vendor-specific settings (Gemini) are managed by their respective agents.
 """
 
 from functools import lru_cache
@@ -119,14 +119,14 @@ class CoreSettings(BaseSettings):
     knowledge_base_source: str | None = None
 
     # Authentication Configuration
-    auth_enabled: bool = False
+    auth_enabled: bool = True
     auth_secret_key: str = ""
     auth_token_ttl: int = 3600
     auth_allowed_origins: str = "http://localhost:5173,http://localhost:5174,http://localhost:5175"
     auth_enable_rate_limiting: bool = True
 
     # Agent Configuration
-    agent_type: str = "sample_openai"  # "sample_openai", "sample_gemini", "remote"
+    agent_type: str = "sample_gemini"  # "sample_gemini", "remote"
     agent_url: str | None = None  # URL for remote agent (e.g., "ws://agent-service:8080/ws")
 
     # Audio Configuration (vendor-agnostic)
