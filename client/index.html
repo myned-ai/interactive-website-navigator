@@ -720,7 +720,7 @@
             </div>
             <!-- 3D Model Viewer -->
             <model-viewer id="product-3d-model" 
-              src="/asset/models/shoe.glb" 
+              src="asset/models/shoe.glb" 
               alt="A 3D model of a product" 
               camera-controls 
               style="width: 250px; height: 250px; background: rgba(0,0,0,0.2); border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);">
@@ -1263,18 +1263,18 @@
           
           if (viewer) {
             const modelPaths = {
-              'NK-AM-001': '/asset/models/shoe.glb',
-              'SN-WH-XM5': '/asset/models/headphones.glb',
-              'AP-WU-002': '/asset/models/apple-watch-ultra.glb',
-              'AP-MBP-M3': '/asset/models/macbook-pro.glb',
-              'LT-MX-3S': '/asset/models/logitech-mouse.glb',
-              'KC-Q6-PRO': '/asset/models/keychron-keyboard.glb',
-              'AP-IPAD-M4': '/asset/models/ipad-pro.glb',
-              'NT-SW-OLED': '/asset/models/nintendo-switch.glb',
-              'DY-AIR-01': '/asset/models/dyson-airwrap.glb'
+              'NK-AM-001': 'asset/models/shoe.glb',
+              'SN-WH-XM5': 'asset/models/headphones.glb',
+              'AP-WU-002': 'asset/models/apple-watch-ultra.glb',
+              'AP-MBP-M3': 'asset/models/macbook-pro.glb',
+              'LT-MX-3S': 'asset/models/logitech-mouse.glb',
+              'KC-Q6-PRO': 'asset/models/keychron-keyboard.glb',
+              'AP-IPAD-M4': 'asset/models/ipad-pro.glb',
+              'NT-SW-OLED': 'asset/models/nintendo-switch.glb',
+              'DY-AIR-01': 'asset/models/dyson-airwrap.glb'
             };
             // Fallback to the Nike shoe if the local asset hasn't been uploaded yet, to prevent a blank preview
-            viewer.src = modelPaths[data.sku] || '/asset/models/shoe.glb';
+            viewer.src = modelPaths[data.sku] || 'asset/models/shoe.glb';
             viewer.cameraOrbit = 'auto auto auto'; // Reset rotation orbit
           }
           detailsContainer.style.display = 'block';
