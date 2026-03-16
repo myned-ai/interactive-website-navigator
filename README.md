@@ -2,6 +2,11 @@
 
 An action-taking, interactive **Gaussian Splatting 3D avatar** that can guide visitors around your website, see what you see, find items you're looking for, and act as an overall website assistant — powered by the **Gemini Live API**.
 
+<p>
+  <img src="images/main.png" width="49%" />
+  <img src="images/3d_rotate.png" width="49%" />
+</p>
+
 ## Features
 
 - **Real-time voice conversation** — Full-duplex audio via Gemini Live API with natural interruptions
