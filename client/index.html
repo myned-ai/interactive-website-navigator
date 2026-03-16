@@ -875,6 +875,7 @@
       widget = AvatarChat.init({
         container: document.body,
         serverUrl: import.meta.env.VITE_WS_URL || 'ws://localhost:8080/ws',
+        auth: import.meta.env.VITE_WS_URL ? true : false,
         avatarUrl: 'asset/nyx.zip',
         position: 'bottom-right',
         width: 360,

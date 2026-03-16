@@ -64,7 +64,7 @@ export interface AppConfig {
 // Default configuration
 const DEFAULT_CONFIG: AppConfig = {
   auth: {
-    enabled: false, // Dev mode: auth disabled for local testing
+    enabled: true,
   },
   websocket: {
     url: (typeof import.meta !== 'undefined' && (import.meta as { env?: { VITE_WS_URL?: string } }).env?.VITE_WS_URL) || 'ws://localhost:8080/ws',
