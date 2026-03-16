@@ -131,4 +131,5 @@ jobs:
       - name: Deploy to Cloud Storage
         run: |
           gsutil -m rsync -r -d client/dist gs://${CLIENT_BUCKET}
-          gsutil -m setmeta -h "Cache-Control:public, max-age=3600" gs://${CLIENT_BUCKET}/**
+          gsutil -m setmeta -h "Cache-Control:public, max-age=31536000, immutable" gs://${CLIENT_BUCKET}/assets/**
+          gsutil setmeta -h "Cache-Control:no-cache" gs://${CLIENT_BUCKET}/index.html

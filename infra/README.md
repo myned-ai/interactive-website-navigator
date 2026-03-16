@@ -139,3 +139,19 @@ GEMINI_API_KEY=your-api-key-here
 ```
 
 The client defaults to `ws://localhost:8080/ws` when `VITE_WS_URL` is not set.
+
+## Teardown
+
+To remove all GCP resources created by the setup script:
+
+**macOS / Linux:**
+```bash
+./infra/teardown.sh
+```
+
+**Windows (PowerShell):**
+```powershell
+.\infra\teardown.ps1
+```
+
+This deletes the Cloud Run service, Artifact Registry repository, Cloud Storage bucket, service account, and IAM bindings. After running, also remove the GitHub repository secrets (`GCP_PROJECT_ID`, `GCP_SA_KEY`, `GCP_CLIENT_BUCKET`, `GCP_AUTH_SECRET_KEY`).
