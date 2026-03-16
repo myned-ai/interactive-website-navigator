@@ -379,6 +379,7 @@ class AvatarChatElement extends HTMLElement {
         debug: this.config.debug,
         clientContext: this.config.clientContext,
         handleRichContentLocally: this.config.handleRichContentLocally,
+        enableFileUpload: this.config.enableFileUpload,
         onRichContentReceived: async (item) => {
           if (this.config.handleRichContentLocally !== false) {
             // Internal handling: Force widget to show chat if it's currently hidden or collapsed

@@ -497,6 +497,62 @@ const CHAT_STYLES = `
   animation: nyxSlideUp 0.3s ease-out;
 }
 
+/* Rich table renderer */
+.nyx-rich-table {
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  overflow: hidden;
+  background: white;
+  font-family: sans-serif;
+  margin-top: 8px;
+}
+
+.nyx-table-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1e293b;
+  padding: 10px 14px 6px;
+}
+
+.nyx-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.nyx-table thead {
+  background: #f8fafc;
+}
+
+.nyx-table-th {
+  text-align: left;
+  padding: 8px 14px;
+  font-weight: 600;
+  color: #64748b;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.nyx-table-tr:not(:last-child) .nyx-table-td {
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.nyx-table-td {
+  padding: 8px 14px;
+  color: #334155;
+}
+
+.nyx-table-td:first-child {
+  font-weight: 500;
+  color: #1e293b;
+}
+
+.nyx-table-tr:hover {
+  background: #f8fafc;
+}
+
 @keyframes nyxSlideUp {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }

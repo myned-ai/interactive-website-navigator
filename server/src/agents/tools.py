@@ -27,7 +27,8 @@ _CORE_GEMINI_ACTIONS = [
                 "(e.g. 'pricing', 'features', 'contact_us'). If no sections were provided, "
                 "you may attempt common IDs like 'top', 'bottom', 'contact'.\n"
                 "**CRITICAL RULE:** Do NOT verbally announce that you are navigating, scrolling, or taking them there. "
-                "Just execute the action silently or incorporate it smoothly into your answer without mentioning the act of navigation."
+                "Just execute the action silently or incorporate it smoothly into your answer without mentioning the act of navigation. "
+                "After this tool executes, do NOT produce a second response repeating what you already said."
             ),
             "parameters": {
                 "type": "OBJECT",
@@ -66,7 +67,11 @@ _CORE_GEMINI_ACTIONS = [
                     },
                     "payload_json": {
                         "type": "STRING",
-                        "description": "A fully serialized JSON string containing the data for the rich element. Must be valid JSON."
+                        "description": (
+                            "A fully serialized JSON string containing the data for the rich element. Must be valid JSON.\n"
+                            "For content_type 'table': use {\"title\": \"...\", \"headers\": [\"Col1\", \"Col2\", ...], \"rows\": [[\"val1\", \"val2\"], ...]}. "
+                            "Headers and cell values MUST be plain strings, NOT objects."
+                        )
                     }
                 },
                 "required": ["item_id", "content_type", "payload_json"]
