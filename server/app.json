@@ -23,7 +23,7 @@
     },
     "GEMINI_VERTEX_LOCATION": {
       "description": "Vertex AI region.",
-      "value": "europe-west1",
+      "value": "us-central1",
       "required": false
     },
     "AUTH_ENABLED": {

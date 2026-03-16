@@ -33,7 +33,7 @@ class GeminiSettings(BaseSettings):
     gemini_api_key: str = ""  # Optional: only needed when NOT using Vertex AI
     gemini_use_vertex: bool = True  # Use Vertex AI (default) vs API key
     gemini_vertex_project: str = ""  # GCP project ID (auto-detected on Cloud Run)
-    gemini_vertex_location: str = "europe-west1"  # Vertex AI region
+    gemini_vertex_location: str = "us-central1"  # Vertex AI region (Live API availability)
     gemini_api_version: str = "v1alpha"
     gemini_model: str = "gemini-2.5-flash-native-audio-preview-12-2025"
     gemini_voice: Literal["Puck", "Charon", "Kore", "Fenrir", "Aoede", "Leda", "Orus", "Zephyr"] = "Kore"
