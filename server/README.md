@@ -15,33 +15,7 @@ The server receives user audio over WebSocket, forwards it to Gemini for real-ti
 
 ## Architecture
 
-```mermaid
-sequenceDiagram
-    participant C as Client (Widget)
-    participant S as Server (Cloud Run)
-    participant G as Gemini Live API (Vertex AI)
-
-    C->>S: Microphone Audio (WebSocket)
-    S->>G: Forward Audio Stream
-    G-->>S: Audio Response + Tool Calls
-    S->>S: Wav2Arkit (ONNX CPU)<br/>Generate Blendshapes
-    S-->>C: sync_frame (Audio + Blendshapes @ 30 FPS)
-
-    Note over C,G: Multimodal Tool Calls
-
-    G-->>S: request_screen_context
-    S-->>C: trigger_action
-    C->>C: Capture viewport (html2canvas)
-    C->>S: Screenshot attachment
-    S->>G: Image → Gemini Vision
-    G-->>S: Visual-aware response
-
-    Note over C,G: Client Actions
-
-    G-->>S: navigate_to_section / send_rich_content
-    S-->>C: trigger_action
-    C->>C: Scroll page / Render rich content
-```
+See the [architecture diagram](../architecture.png).
 
 ## Google Cloud Services
 
@@ -51,7 +25,27 @@ sequenceDiagram
 | **Vertex AI** | Gemini Live API access (no API key needed) |
 | **Artifact Registry** | Docker image storage |
 
+## Prerequisites
+
+- Python 3.10.x (exact version required)
+- [uv](https://github.com/astral-sh/uv) package manager
+- Google Gemini API key from [AI Studio](https://aistudio.google.com/apikey) (for local development)
+- Docker 20.10+ and Docker Compose 2.0+ (for containerized deployment)
+
 ## Quick Start
+
+### Docker (Recommended)
+
+```bash
+cp .env.example .env
+# Edit .env: set GEMINI_USE_VERTEX=false, GEMINI_API_KEY, AUTH_ENABLED=false
+
+# Production
+docker-compose up -d
+
+# Development (hot reload)
+docker-compose --profile dev up
+```
 
 ### Local Development
 
@@ -78,27 +72,17 @@ uv run python src/main.py
 
 Server starts at `http://localhost:8080`
 
-**Test the server:** Open `test.html` in your browser to test the widget with your local server. Make sure `AUTH_ENABLED=false` in your `.env` file for local testing.
+### Testing
 
-### Prerequisites
-
-- Python 3.10.x (exact version required)
-- [uv](https://github.com/astral-sh/uv) package manager
-- Google Gemini API key (for local development with AI Studio)
-- Docker 20.10+ and Docker Compose 2.0+ (for containerized deployment)
-
-### Docker
+Make sure `AUTH_ENABLED=false` in your `.env` file. Then start the client:
 
 ```bash
-cp .env.example .env
-# Edit .env with your settings
-
-# Production
-docker-compose up -d
-
-# Development (hot reload)
-docker-compose --profile dev up
+cd ../client
+npm install
+npm run dev
 ```
+
+Open the URL shown by Vite. Click the avatar bubble, allow microphone access, and start talking.
 
 ## Configuration
 
@@ -138,30 +122,19 @@ All settings can be configured via environment variables or `.env` file. See [.e
 | `AUTH_TOKEN_TTL` | `3600` | Token TTL in seconds |
 | `AUTH_ENABLE_RATE_LIMITING` | `true` | Enable per-origin rate limiting |
 
-## Docker Usage
-
-### Multi-Stage Build
+## Docker
 
 The Dockerfile uses a multi-stage build optimized for CPU-only production:
 
-1. **Base Stage**: Python 3.10-slim with system dependencies, downloads pretrained models from HuggingFace
-2. **Dependencies Stage**: Fast dependency installation with uv
-3. **Production Stage**: Minimal image with non-root user, health checks
-4. **Development Stage**: Hot reload support
-
-### Production Deployment
+1. **Base Stage** — Python 3.10-slim with system dependencies, downloads pretrained models from HuggingFace
+2. **Dependencies Stage** — Fast dependency installation with uv
+3. **Production Stage** — Minimal image with non-root user, health checks
+4. **Development Stage** — Hot reload support
 
 ```bash
-# Build image
+# Build and run standalone
 docker build -t web-navigator-server .
-
-# Run (CPU-only)
-docker run -d \
-  --name web-navigator-server \
-  -p 8080:8080 \
-  --env-file .env \
-  --restart unless-stopped \
-  web-navigator-server
+docker run -d --name web-navigator-server -p 8080:8080 --env-file .env web-navigator-server
 
 # View logs
 docker logs -f web-navigator-server
@@ -308,14 +281,3 @@ uv run ruff check src/ --fix && uv run ruff format src/ && uv run ty check src/
 # Run tests
 uv run pytest
 ```
-
-## License
-
-MIT — see [LICENSE](LICENSE).
-
-## Acknowledgments
-
-- [Google Gemini](https://ai.google.dev/) — Live API for real-time voice AI
-- [Apple ARKit](https://developer.apple.com/augmented-reality/arkit/) — Blendshape specification
-- [LAM Audio2Expression](https://github.com/aigc3d/LAM_Audio2Expression) — Facial animation model
-- [Wav2Vec 2.0](https://ai.meta.com/blog/wav2vec-20-learning-the-structure-of-speech-from-raw-audio/) — Speech representation learning
