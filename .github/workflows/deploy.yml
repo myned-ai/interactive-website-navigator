@@ -80,7 +80,7 @@ jobs:
             --allow-unauthenticated \
             --min-instances 1 \
             --max-instances 5 \
-            --set-env-vars "AUTH_SECRET_KEY=${{ secrets.GCP_AUTH_SECRET_KEY }},AUTH_ALLOWED_ORIGINS=https://storage.googleapis.com"
+            --set-env-vars "AUTH_SECRET_KEY=${{ secrets.GCP_AUTH_SECRET_KEY }},AUTH_ALLOWED_ORIGINS=https://storage.googleapis.com,GEMINI_VERTEX_PROJECT=${PROJECT_ID}"
 
   deploy-client:
     needs: [detect-changes, deploy-server]
