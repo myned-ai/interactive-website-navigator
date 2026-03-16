@@ -1,0 +1,104 @@
+# ==============================================================================
+# Avatar Chat Server - Docker Compose Configuration
+# ==============================================================================
+#
+# Usage:
+#   Production:  docker-compose up -d
+#   Development: docker-compose --profile dev up
+#   Logs:        docker-compose logs -f
+#   Stop:        docker-compose down
+#
+# ==============================================================================
+
+services:
+  # ============================================================================
+  # Avatar Chat Server (Production)
+  # ============================================================================
+  server:
+    build:
+      context: .
+      target: production
+    container_name: avatar-chat-server
+    ports:
+      - "${SERVER_PORT:-8080}:8080"
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - OPENAI_MODEL=${OPENAI_MODEL:-gpt-4o-realtime-preview}
+      - OPENAI_VOICE=${OPENAI_VOICE:-alloy}
+      - OPENAI_VAD_TYPE=${OPENAI_VAD_TYPE:-server_vad}
+      - OPENAI_VAD_THRESHOLD=${OPENAI_VAD_THRESHOLD:-0.5}
+      - OPENAI_VAD_SILENCE_DURATION_MS=${OPENAI_VAD_SILENCE_DURATION_MS:-300}
+      - OPENAI_VAD_PREFIX_PADDING_MS=${OPENAI_VAD_PREFIX_PADDING_MS:-300}
+      - OPENAI_TRANSCRIPTION_MODEL=${OPENAI_TRANSCRIPTION_MODEL:-gpt-4o-mini-transcribe}
+      - OPENAI_TRANSCRIPTION_LANGUAGE=${OPENAI_TRANSCRIPTION_LANGUAGE:-en}
+      - OPENAI_NOISE_REDUCTION=${OPENAI_NOISE_REDUCTION:-near_field}
+      - ASSISTANT_INSTRUCTIONS=${ASSISTANT_INSTRUCTIONS:-You are a helpful and friendly AI assistant.}
+      - ONNX_MODEL_PATH=/app/pretrained_models/wav2arkit_cpu.onnx
+      - SERVER_HOST=0.0.0.0
+      - SERVER_PORT=8080
+      - AUTH_ENABLED=false
+      - DEBUG=${DEBUG:-false}
+      - DEBUG_AUDIO_CAPTURE=${DEBUG_AUDIO_CAPTURE:-false}
+      # Agent Configuration
+      - AGENT_TYPE=${AGENT_TYPE:-sample_gemini}
+      # Gemini Configuration
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - GEMINI_MODEL=${GEMINI_MODEL}
+      - GEMINI_VOICE=${GEMINI_VOICE}
+      - GEMINI_THINKING_BUDGET=${GEMINI_THINKING_BUDGET}
+      - GEMINI_GOOGLE_SEARCH_GROUNDING=${GEMINI_GOOGLE_SEARCH_GROUNDING}
+      - GEMINI_PROACTIVE_AUDIO=${GEMINI_PROACTIVE_AUDIO}
+      - GEMINI_CONTEXT_WINDOW_COMPRESSION=${GEMINI_CONTEXT_WINDOW_COMPRESSION}
+      - KNOWLEDGE_BASE_SOURCE=${KNOWLEDGE_BASE_SOURCE:-none}
+    volumes:
+      # Mount Knowledge Base
+      - ./data:/app/data
+      # Mount ONNX model (CPU-only)
+      - ./src/pretrained_models/wav2arkit_cpu.onnx:/app/pretrained_models/wav2arkit_cpu.onnx:ro
+      - ./src/pretrained_models/wav2arkit_cpu.onnx.data:/app/pretrained_models/wav2arkit_cpu.onnx.data:ro
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8080/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # ============================================================================
+  # Avatar Chat Server (Development with hot reload)
+  # ============================================================================
+  server-dev:
+    build:
+      context: .
+      target: development
+    container_name: avatar-chat-server-dev
+    profiles:
+      - dev
+    ports:
+      - "${SERVER_PORT:-8080}:8080"
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - OPENAI_MODEL=${OPENAI_MODEL:-gpt-4o-realtime-preview}
+      - OPENAI_VOICE=${OPENAI_VOICE:-alloy}
+      - ASSISTANT_INSTRUCTIONS=${ASSISTANT_INSTRUCTIONS:-You are a helpful and friendly AI assistant.}
+      - ONNX_MODEL_PATH=/app/pretrained_models/wav2arkit_cpu.onnx
+      - SERVER_HOST=0.0.0.0
+      - SERVER_PORT=8080
+      - AUTH_ENABLED=false
+      - DEBUG=true
+      # Agent Configuration
+      - AGENT_TYPE=${AGENT_TYPE:-sample_gemini}
+      # Gemini Configuration
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - GEMINI_MODEL=${GEMINI_MODEL}
+      - GEMINI_VOICE=${GEMINI_VOICE}
+      - GEMINI_THINKING_BUDGET=${GEMINI_THINKING_BUDGET}
+      - GEMINI_GOOGLE_SEARCH_GROUNDING=${GEMINI_GOOGLE_SEARCH_GROUNDING}
+      - GEMINI_PROACTIVE_AUDIO=${GEMINI_PROACTIVE_AUDIO}
+      - GEMINI_CONTEXT_WINDOW_COMPRESSION=${GEMINI_CONTEXT_WINDOW_COMPRESSION}
+      - KNOWLEDGE_BASE_SOURCE=${KNOWLEDGE_BASE_SOURCE:-none}
+      # Mount source code for hot reload
+      - .:/app
+      # Mount ONNX model (CPU-only)
+      - ./src/pretrained_models/wav2arkit_cpu.onnx:/app/pretrained_models/wav2arkit_cpu.onnx:ro
+      - ./src/pretrained_models/wav2arkit_cpu.onnx.data:/app/pretrained_models/wav2arkit_cpu.onnx.data:ro
