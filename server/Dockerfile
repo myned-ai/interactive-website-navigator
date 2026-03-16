@@ -54,7 +54,7 @@ FROM base AS dependencies
 USER appuser
 
 # Copy dependency files first for better caching
-COPY --chown=appuser:appuser pyproject.toml README.md ./
+COPY --chown=appuser:appuser pyproject.toml uv.lock README.md ./
 
 # Install Python dependencies and clean uv cache in same layer
 RUN uv sync --frozen --no-dev || uv sync --no-dev \
