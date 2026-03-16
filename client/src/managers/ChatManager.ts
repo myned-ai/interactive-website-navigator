@@ -56,6 +56,8 @@ export interface ChatManagerOptions {
   clientContext?: Record<string, any>;
   /** Whether to render rich content internally (default: true) */
   handleRichContentLocally?: boolean;
+  /** Enable file upload button (default: false) */
+  enableFileUpload?: boolean;
   /** Callback when any rich content is received (whether local or not) */
   onRichContentReceived?: (item: RichContentItem) => void | Promise<void>;
   /** Debug mode */
@@ -169,6 +171,57 @@ export class ChatManager implements Disposable {
             <strong style="display:block; font-size:14px; margin-bottom:4px; color:#1e293b;">${payload.title || 'Link'}</strong>
             <div style="font-size:12px; color:#64748b; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">${payload.description || ''}</div>
           </div>
+        </div>
+      `;
+    });
+
+    // Table renderer: renders structured data as a clean table
+    this.registerRichRenderer('table', null, (payload, container) => {
+      // Headers may arrive as strings or objects — normalize to strings
+      const toStr = (v: unknown): string =>
+        typeof v === 'string' ? v
+        : v && typeof v === 'object' ? (
+            (v as Record<string, unknown>).label
+            ?? (v as Record<string, unknown>).name
+            ?? (v as Record<string, unknown>).title
+            ?? (v as Record<string, unknown>).key
+            ?? (v as Record<string, unknown>).value
+            ?? Object.values(v as Record<string, unknown>)[0]
+            ?? ''
+          ) as string
+        : String(v ?? '');
+      const headers: string[] = Array.isArray(payload.headers) ? payload.headers.map(toStr) : [];
+      const rows: string[][] = Array.isArray(payload.rows)
+        ? payload.rows.map((r: unknown) => Array.isArray(r) ? r.map(toStr) : [toStr(r)])
+        : [];
+      const title: string = payload.title || '';
+
+      const escapeHtml = (s: string) => {
+        const div = document.createElement('div');
+        div.textContent = String(s);
+        return div.innerHTML;
+      };
+
+      const headerCells = headers
+        .map(h => `<th class="nyx-table-th">${escapeHtml(h)}</th>`)
+        .join('');
+
+      const bodyRows = rows
+        .map(row => {
+          const cells = (Array.isArray(row) ? row : [row])
+            .map(cell => `<td class="nyx-table-td">${escapeHtml(cell)}</td>`)
+            .join('');
+          return `<tr class="nyx-table-tr">${cells}</tr>`;
+        })
+        .join('');
+
+      container.innerHTML = `
+        <div class="nyx-rich-table">
+          ${title ? `<div class="nyx-table-title">${escapeHtml(title)}</div>` : ''}
+          <table class="nyx-table">
+            ${headerCells ? `<thead><tr>${headerCells}</tr></thead>` : ''}
+            <tbody>${bodyRows}</tbody>
+          </table>
         </div>
       `;
     });
@@ -426,6 +479,12 @@ export class ChatManager implements Disposable {
 
   private setupAttachmentHandling(): void {
     if (!this.uploadBtn || !this.fileUpload || !this.attachmentContainer) return;
+
+    // Hide upload button unless explicitly enabled
+    if (!this.options.enableFileUpload) {
+      this.uploadBtn.style.display = 'none';
+      return;
+    }
 
     // Trigger file dialog
     this.uploadBtn.addEventListener('click', () => {

@@ -117,6 +117,9 @@ class SampleGeminiAgent(BaseAgent):
             logger.warning(f"Not connected, dropping {len(audio_bytes)} bytes")
             return
 
+        # Clear context suppression — user is actively speaking now
+        self._suppress_next_response = False
+
        
         # Check if resampling is needed
         # We assume input is matching configured input_sample_rate (negotiated by ChatSession)
@@ -426,10 +429,18 @@ class SampleGeminiAgent(BaseAgent):
                         self.cancel_response()
                         asyncio.create_task(self._handle_interruption_signal())
                     else:
+                        # Provide a response that discourages the model from repeating itself.
+                        # Without this guidance, Gemini tends to generate a second spoken response
+                        # acknowledging the tool result, causing the user to hear the action described twice.
                         tool_resp = types.FunctionResponse(
                             id=fc.id,
                             name=fc.name,
-                            response={"result": "ok"}
+                            response={
+                                "result": "ok",
+                                "instruction": "Action executed successfully on the client. "
+                                    "Do NOT repeat or re-announce what you just said. "
+                                    "Continue the conversation naturally only if you have something new to add."
+                            }
                         )
                         function_responses.append(tool_resp)
                 
@@ -674,6 +685,9 @@ class SampleGeminiAgent(BaseAgent):
         if not self._connected or not self._session:
             return
 
+        # Clear context suppression — user is actively speaking now
+        self._suppress_next_response = False
+
         # Cancel any ongoing response before sending new message
         if self._state.is_responding:
             logger.debug("Cancelling ongoing response due to text message")
@@ -802,6 +816,12 @@ class SampleGeminiAgent(BaseAgent):
         # Send text to context without triggering a turn response if it's just meant to be silent context
         # (This avoids triggering audio_start on the client, which would clear suggestion chips)
         end_of_turn = (directive != "context")
+        
+        # Activate suppression for context events — if Gemini still generates a response despite
+        # end_of_turn=False, we must suppress it so the client doesn't hear an unwanted reply.
+        if directive == "context":
+            self._suppress_next_response = True
+        
         await self._send_text_async(event_str, attachments=attachments, end_of_turn=end_of_turn)
 
     # Removed duplicate append_audio and _resample_audio methods that were causing conflicts

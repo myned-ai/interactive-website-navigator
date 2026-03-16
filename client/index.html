@@ -4,9 +4,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nyx Avatar Chat — Feature Demo</title>
+  <title>TechVault — Premium Hardware & Gadgets</title>
   <link rel="icon"
-    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛒</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
@@ -435,7 +435,7 @@
 
     /* ── Rich content demo ── */
     #richDemo {
-      display: none;
+      display: block;
       background: var(--surface2);
       border: 1px solid rgba(78, 205, 196, 0.3);
       border-radius: var(--radius);
@@ -510,116 +510,116 @@
     <!-- ─────────── Sidebar ─────────── -->
     <aside class="sidebar">
       <div class="sidebar-header">
-        <div class="badge badge-purple">✦ Developer Demo</div>
-        <h1>Nyx Feature Playground</h1>
-        <p>Interactive controls showing the new client event system, rich messaging, and prompt security features.</p>
+        <div class="badge badge-purple">✦ Gemini Live Agent Challenge</div>
+        <h1>TechVault Demo Playground</h1>
+        <p>This sidebar helps you explore and test the agent's capabilities. Open the chat widget (bottom-right) and try the suggested prompts below.</p>
         <div class="conn-status">
           <span class="conn-dot disconnected" id="connDot"></span>
           <span id="connLabel">Connecting…</span>
         </div>
       </div>
 
-      <!-- 1: clientContext -->
+      <!-- 1: Voice & Conversation -->
       <div class="panel">
-        <div class="badge badge-purple">clientContext</div>
-        <h2>🚀 Initialization Config</h2>
-        <p>Sent automatically on connect. The AI reads this silently and adapts for this session.</p>
-        <div class="context-status">
-          navigation_sections: top, home,<br>&nbsp;&nbsp;pricing, contact_us, bottom<br>
-          page_topic: "Feature Demo"<br>
-          user_tier: "Developer"
+        <div class="badge badge-purple">🎤 Real-Time Voice Chat</div>
+        <h2>Talk to the Agent</h2>
+        <p>Click the chat bubble, then use the mic button to speak. The agent responds with real-time streaming voice and lip-synced avatar expressions. You can interrupt the agent mid-sentence — just start talking and it will stop and listen.</p>
+        <div style="font-size: 11px; color: var(--text-muted); line-height: 1.7; background: rgba(0,0,0,0.2); padding: 10px 12px; border-radius: 8px; border: 1px solid var(--border);">
+          <div style="font-weight: 600; color: #a69cff; margin-bottom: 4px;">💬 Try saying:</div>
+          <div style="margin-bottom: 3px;">"Tell me about Tech Vault!"</div>
+          <div style="margin-bottom: 3px;">"What products do you have?"</div>
+          <div>"What shipping options are available?"</div>
         </div>
       </div>
 
-      <!-- 2: sendEvent -->
+      <!-- 2: Product Context Awareness -->
       <div class="panel">
-        <div class="badge badge-teal">sendEvent</div>
-        <h2>📡 Client Events</h2>
-        <p>
-          Use <code
-            style="background:rgba(78,205,196,0.15);padding:1px 5px;border-radius:4px;color:#4ecdc4">directive:'context'</code>
-          to send data silently,
-          or <code
-            style="background:rgba(108,99,255,0.15);padding:1px 5px;border-radius:4px;color:#a69cff">directive:'speak'</code>
-          to make the agent respond immediately.
-        </p>
-        <button class="btn btn-teal" id="btnContext">
-          <span class="icon">👁️</span>
-          <span class="label">page_view event</span>
-          <span class="hint">context</span>
-        </button>
+        <div class="badge badge-teal">👁️ Context Awareness</div>
+        <h2>Click a Product, Then Ask</h2>
+        <p>Click any product on the right. The agent silently receives the context — then ask about it naturally.</p>
+        <div style="font-size: 11px; color: var(--text-muted); line-height: 1.7; background: rgba(0,0,0,0.2); padding: 10px 12px; border-radius: 8px; border: 1px solid var(--border);">
+          <div style="font-weight: 600; color: #4ecdc4; margin-bottom: 4px;">💬 Try this flow:</div>
+          <div style="margin-bottom: 3px;">1. Click <strong style="color:var(--text)">Nike AI Max</strong> on the page</div>
+          <div style="margin-bottom: 3px;">2. Say: "Tell me more about this"</div>
+          <div>3. Say: "Rotate it to the left" (3D model)</div>
+        </div>
+        <hr class="divider">
+        <div style="font-size: 10px; color: var(--text-muted); margin-top: 4px;">ℹ️ 3D models available for: Nike AI Max, Sony WH-1000XM5</div>
+      </div>
+
+      <!-- 3: Rich Content & Visual Tools -->
+      <div class="panel">
+        <div class="badge badge-green">📊 Rich Visual Responses</div>
+        <h2>Tables, Cards & Visuals</h2>
+        <p>The agent can push interactive rich content (tables, product cards, link cards) into the chat alongside its voice response.</p>
+        <div style="font-size: 11px; color: var(--text-muted); line-height: 1.7; background: rgba(0,0,0,0.2); padding: 10px 12px; border-radius: 8px; border: 1px solid var(--border);">
+          <div style="font-weight: 600; color: #50c878; margin-bottom: 4px;">💬 Try saying:</div>
+          <div style="margin-bottom: 3px;">"Show me a comparison of the shipping plans"</div>
+          <div style="margin-bottom: 3px;">"What are the specs of the Apple Watch?"</div>
+          <div>"Show me the pricing plans in a table"</div>
+        </div>
+      </div>
+
+      <!-- 4: Navigation & Actions -->
+      <div class="panel">
+        <div class="badge badge-red">⚡ Page Navigation & Actions</div>
+        <h2>AI Controls the Page</h2>
+        <p>The agent can scroll to sections and trigger visual effects on the page via Gemini tool calls.</p>
+        <div style="font-size: 11px; color: var(--text-muted); line-height: 1.7; background: rgba(0,0,0,0.2); padding: 10px 12px; border-radius: 8px; border: 1px solid var(--border);">
+          <div style="font-weight: 600; color: #ff6b6b; margin-bottom: 4px;">💬 Try saying:</div>
+          <div style="margin-bottom: 3px;">"Take me to the contact form"</div>
+          <div style="margin-bottom: 3px;">"Show me the products"</div>
+          <div>"I just made a purchase!" (triggers confetti 🎉)</div>
+        </div>
+      </div>
+
+      <!-- 5: Screen Vision -->
+      <div class="panel">
+        <div class="badge badge-teal">📸 Screen Vision</div>
+        <h2>The Agent Can See Your Screen</h2>
+        <p>The agent captures a screenshot and uses multimodal vision to answer questions about what's visible.</p>
+        <div style="font-size: 11px; color: var(--text-muted); line-height: 1.7; background: rgba(0,0,0,0.2); padding: 10px 12px; border-radius: 8px; border: 1px solid var(--border);">
+          <div style="font-weight: 600; color: #4ecdc4; margin-bottom: 4px;">💬 Try saying:</div>
+          <div>"Help me fill out this form" (scroll to contact first)</div>
+        </div>
+      </div>
+
+      <!-- 6: Event Simulation (Advanced) -->
+      <div class="panel" style="opacity: 0.85;">
+        <div class="badge badge-purple">🔧 Advanced: Event Simulation</div>
+        <h2>Simulate Client Events</h2>
+        <p style="font-size: 10.5px;">These buttons simulate real-time events that a host website would send to the agent programmatically.</p>
         <button class="btn btn-purple" id="btnSpeak">
           <span class="icon">🎙️</span>
           <span class="label">promo_ended event</span>
-          <span class="hint">speak → AI responds</span>
+          <span class="hint">agent speaks</span>
         </button>
         <button class="btn btn-red" id="btnPayFail">
           <span class="icon">⚠️</span>
           <span class="label">payment_failed event</span>
-          <span class="hint">speak → AI responds</span>
+          <span class="hint">agent speaks</span>
         </button>
-        <hr class="divider">
-        <div class="event-log" id="eventLog">
-          <div class="log-entry"><span class="log-ts">--:--</span><span style="color:#555">&nbsp;ready…</span></div>
-        </div>
-      </div>
-
-      <!-- 3: Rich Content -->
-      <div class="panel">
-        <div class="badge badge-green">registerRichRenderer</div>
-        <h2>🖼️ Rich Content</h2>
-        <p>Simulate the server pushing a structured pricing table via <code
-            style="color:#50c878;background:rgba(80,200,120,0.1);padding:1px 5px;border-radius:4px">send_rich_content</code>.
-        </p>
-        <div
-          style="margin: 10px 0; background: rgba(0,0,0,0.2); padding: 8px; border-radius: 6px; display: flex; align-items: center; gap: 10px; font-size: 11px;">
-          <span style="color: var(--text-muted)">Handling:</span>
-          <label style="display: flex; align-items: center; gap: 4px; cursor: pointer;">
-            <input type="radio" name="richMode" value="local" checked> Internal
-          </label>
-          <label style="display: flex; align-items: center; gap: 4px; cursor: pointer;">
-            <input type="radio" name="richMode" value="external"> External (Event)
-          </label>
-        </div>
-
-        <button class="btn btn-green" id="btnRichPricing">
-          <span class="icon">📊</span>
-          <span class="label">Show Pricing Table</span>
-          <span class="hint">type: pricing_table</span>
-        </button>
-        <button class="btn btn-teal" id="idRichSpotlight">
-          <span class="icon">✨</span>
-          <span class="label">Show Product Spotlight</span>
-          <span class="hint">type: product_spotlight</span>
-        </button>
-        <button class="btn btn-ghost" id="btnRichHide">
-          <span class="icon">✕</span>
-          <span class="label">Dismiss</span>
-        </button>
-      </div>
-
-      <!-- 4: Actions -->
-      <div class="panel">
-        <div class="badge badge-red">triggerAction</div>
-        <h2>⚡ AI Actions</h2>
-        <p>Client-side actions the AI would normally fire via tool calls.</p>
         <button class="btn btn-purple" id="btnConfetti">
           <span class="icon">🎉</span>
           <span class="label">Trigger Confetti</span>
         </button>
         <button class="btn btn-purple" id="btnLinkCard">
           <span class="icon">🔗</span>
-          <span class="label">Trigger Link Card</span>
-          <span class="hint">type: link_card</span>
+          <span class="label">Push Link Card</span>
+          <span class="hint">rich content</span>
         </button>
         <button class="btn btn-ghost" id="btnNavContact">
           <span class="icon">📬</span>
-          <span class="label">Navigate → Contact Form</span>
+          <span class="label">Navigate → Contact</span>
         </button>
         <button class="btn btn-ghost" id="btnNavTop">
           <span class="icon">⬆️</span>
           <span class="label">Navigate → Top</span>
         </button>
+        <hr class="divider">
+        <div class="event-log" id="eventLog">
+          <div class="log-entry"><span class="log-ts">--:--</span><span style="color:#555">&nbsp;ready…</span></div>
+        </div>
       </div>
     </aside>
 
@@ -636,70 +636,69 @@
       <!-- HERO SECTION -->
       <section id="home" class="hero"
         style="min-height: 400px; display: flex; flex-direction: column; justify-content: center; align-items: center; border-bottom: 1px solid var(--border); width: 100%;">
-        <div class="badge badge-teal" style="margin-bottom: 16px;">Step into the Future</div>
-        <h2>The World's Most Human AI Assistant</h2>
-        <p>Nyx combines real-time voice, lifelike micro-expressions, and advanced client-side interactivity to redefine
-          how users interact with your website.</p>
+        <div class="badge badge-teal" style="margin-bottom: 16px;">New Arrivals 2026</div>
+        <h1 style="font-size: 48px; font-weight: 800; margin-bottom: 8px; background: linear-gradient(135deg, #a69cff, #4ecdc4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Tech Vault</h1>
+        <h2>Premium Hardware & Gadgets</h2>
+        <p>Discover top-tier tech at unbeatable prices. From laptops and headphones to keyboards and smartwatches — everything you need, all in one place.</p>
         <div style="margin-top: 32px; display: flex; gap: 12px;">
-          <button class="btn btn-purple" style="width: auto; padding: 12px 24px;">Get Started Free</button>
-          <button class="btn btn-ghost" style="width: auto; padding: 12px 24px;">View Documentation</button>
+          <button class="btn btn-purple" style="width: auto; padding: 12px 24px;">Shop Now</button>
+          <button class="btn btn-ghost" style="width: auto; padding: 12px 24px;">View Deals</button>
         </div>
       </section>
 
       <!-- FEATURES / PRODUCTS SECTION -->
       <section id="features"
         style="padding: 60px 0; border-bottom: 1px solid var(--border); width: 100%; text-align: center;">
-        <div class="badge badge-purple" style="margin-bottom: 12px;">The Nyx Collection</div>
+        <div class="badge badge-purple" style="margin-bottom: 12px;">Our Catalog</div>
         <h3 style="font-size: 24px; margin-bottom: 12px;">Curated Premium Hardware</h3>
         <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto 40px; font-size: 14px;">
-          Click a product below to send context to Nyx. Notice how she stays silent but updates her memory of what
-          you're viewing.
+          Browse our selection of top-rated hardware and gadgets. Click any product for details, specs, and pricing.
         </p>
 
         <div class="product-grid" style="max-width: 1000px; margin: 0 auto;">
-          <div class="product-card" data-name="Nike Air Max" data-price="120" data-sku="NK-AM-001">
+          <div class="product-card" data-name="Nike AI Max" data-price="120" data-sku="NK-AM-001" data-category="Footwear">
             <div class="product-emoji">👟</div>
-            <div class="product-name">Nike Air Max</div>
+            <div class="product-name">Nike AI Max</div>
             <div class="product-price">$120.00</div>
           </div>
-          <div class="product-card" data-name="Sony WH-1000XM5" data-price="349" data-sku="SN-WH-XM5">
+          <div class="product-card" data-name="Sony WH-1000XM5" data-price="349" data-sku="SN-WH-XM5" data-category="Audio">
             <div class="product-emoji">🎧</div>
             <div class="product-name">Sony WH-1000XM5</div>
             <div class="product-price">$349.00</div>
           </div>
-          <div class="product-card" data-name="Apple Watch Ultra" data-price="799" data-sku="AP-WU-002">
+          <div class="product-card" data-name="Apple Watch Ultra" data-price="799" data-sku="AP-WU-002" data-category="Wearables">
             <div class="product-emoji">⌚</div>
             <div class="product-name">Apple Watch Ultra</div>
             <div class="product-price">$799.00</div>
           </div>
           <!-- New Products -->
-          <div class="product-card" data-name="MacBook Pro M3" data-price="1999" data-sku="AP-MBP-M3">
+          <div class="product-card" data-name="MacBook Pro M3" data-price="1999" data-sku="AP-MBP-M3" data-category="Laptops">
             <div class="product-emoji">💻</div>
             <div class="product-name">MacBook Pro M3</div>
             <div class="product-price">$1,999.00</div>
           </div>
-          <div class="product-card" data-name="Logitech MX Master 3S" data-price="99" data-sku="LT-MX-3S">
+          <div class="product-card" data-name="Logitech MX Master 3S" data-price="99" data-sku="LT-MX-3S" data-category="Peripherals">
             <div class="product-emoji">🖱️</div>
             <div class="product-name">Logitech MX Master 3S</div>
             <div class="product-price">$99.00</div>
           </div>
-          <div class="product-card" data-name="Keychron Q6 Pro" data-price="189" data-sku="KC-Q6-PRO">
+          <div class="product-card" data-name="Keychron Q6 Pro" data-price="189" data-sku="KC-Q6-PRO" data-category="Peripherals">
             <div class="product-emoji">⌨️</div>
             <div class="product-name">Keychron Q6 Pro</div>
             <div class="product-price">$189.00</div>
           </div>
           <!-- More Products added per request -->
-          <div class="product-card" data-name="iPad Pro M4" data-price="999" data-sku="AP-IPAD-M4">
+          <div class="product-card" data-name="iPad Pro M4" data-price="999" data-sku="AP-IPAD-M4" data-category="Tablets">
             <div class="product-emoji">📱</div>
             <div class="product-name">iPad Pro M4</div>
             <div class="product-price">$999.00</div>
           </div>
-          <div class="product-card" data-name="Nintendo Switch OLED" data-price="349" data-sku="NT-SW-OLED">
+          <div class="product-card" data-name="Nintendo Switch OLED" data-price="349" data-sku="NT-SW-OLED" data-category="Gaming">
             <div class="product-emoji">🎮</div>
             <div class="product-name">Switch OLED</div>
             <div class="product-price">$349.00</div>
           </div>
-          <div class="product-card" data-name="Dyson Airwrap" data-price="599" data-sku="DY-AIR-01">
+          <div class="product-card" data-name="Dyson Airwrap" data-price="599" data-sku="DY-AIR-01" data-category="Personal Care">
             <div class="product-emoji">✨</div>
             <div class="product-name">Dyson Airwrap</div>
             <div class="product-price">$599.00</div>
@@ -715,7 +714,7 @@
                 <div id="pd-sku" style="font-size: 11px; color: #a69cff; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 4px;">SKU</div>
                 <div id="pd-name" style="font-size: 20px; font-weight: 700; margin-bottom: 8px;">Name</div>
                 <div id="pd-price" style="font-size: 18px; color: #4ecdc4; font-weight: 600; margin-bottom: 12px;">$Price</div>
-                <p style="font-size: 13px; color: var(--text-muted); line-height: 1.5; max-width: 300px;">This is a premium product in the Nyx collection. Experience the next generation of quality and design.</p>
+                <p style="font-size: 13px; color: var(--text-muted); line-height: 1.5; max-width: 300px;">A premium pick from our catalog. Top-tier quality, modern design, and built to last.</p>
               </div>
             </div>
             <!-- 3D Model Viewer -->
@@ -725,6 +724,11 @@
               camera-controls 
               style="width: 250px; height: 250px; background: rgba(0,0,0,0.2); border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);">
             </model-viewer>
+            <div id="no-3d-model" style="display: none; width: 250px; height: 250px; background: rgba(0,0,0,0.2); border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); flex-direction: column; align-items: center; justify-content: center; gap: 8px;">
+              <span style="font-size: 36px; opacity: 0.4;">🧊</span>
+              <span style="font-size: 12px; color: var(--text-muted); font-weight: 500;">3D Preview</span>
+              <span style="font-size: 11px; color: #555;">Not available for this product</span>
+            </div>
           </div>
         </div>
       </section>
@@ -732,45 +736,45 @@
       <!-- PRICING SECTION -->
       <section id="pricing"
         style="padding: 60px 0; border-bottom: 1px solid var(--border); width: 100%; text-align: center;">
-        <div class="badge badge-green" style="margin-bottom: 12px;">Pricing Plans</div>
-        <h3 style="font-size: 24px; margin-bottom: 32px;">Scale as you grow</h3>
+        <div class="badge badge-green" style="margin-bottom: 12px;">Shipping & Protection</div>
+        <h3 style="font-size: 24px; margin-bottom: 12px;">Choose Your Coverage</h3>
+        <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto 32px; font-size: 14px;">Every order ships free. Upgrade your protection plan for extended warranty and priority support.</p>
 
         <div
           style="display: flex; justify-content: center; width: 100%; flex-direction: column; align-items: center; gap: 20px;">
-          <div id="richDemo" style="margin: 0; display: none; width: 100%; max-width: 600px;">
+          <div id="richDemo" style="margin: 0; width: 100%; max-width: 600px;">
             <div
               style="background: var(--surface2); border: 1px solid var(--border); border-radius: 12px; padding: 16px; animation: fadeIn 0.5s ease;">
               <h4 style="font-size: 13px; margin-bottom: 12px; color: #a69cff; text-align: left;">📊 Comparison Table
               </h4>
               <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
                 <div style="background: rgba(0,0,0,0.2); border-radius: 8px; padding: 12px; text-align: center;">
-                  <div style="font-size: 11px; font-weight: 600; margin-bottom: 4px;">Basic</div>
+                  <div style="font-size: 11px; font-weight: 600; margin-bottom: 4px;">Standard</div>
                   <div style="font-size: 18px; font-weight: 700; color: #4ecdc4; margin-bottom: 8px;">Free</div>
                   <ul style="list-style: none; padding: 0; margin: 0; text-align: left;">
-                    <li style="font-size: 10px; color: #8b8fa8; margin-bottom: 4px;">• Core AI</li>
-                    <li style="font-size: 10px; color: #8b8fa8; margin-bottom: 4px;">• Web Chat</li>
+                    <li style="font-size: 10px; color: #8b8fa8; margin-bottom: 4px;">• Free shipping</li>
+                    <li style="font-size: 10px; color: #8b8fa8; margin-bottom: 4px;">• 1-year warranty</li>
+                    <li style="font-size: 10px; color: #8b8fa8; margin-bottom: 4px;">• 30-day returns</li>
                   </ul>
                 </div>
                 <div style="background: rgba(0,0,0,0.2); border-radius: 8px; padding: 12px; text-align: center;">
-                  <div style="font-size: 11px; font-weight: 600; margin-bottom: 4px;">Growth</div>
+                  <div style="font-size: 11px; font-weight: 600; margin-bottom: 4px;">Plus</div>
                   <div style="font-size: 18px; font-weight: 700; color: #4ecdc4; margin-bottom: 8px;">$29</div>
                   <ul style="list-style: none; padding: 0; margin: 0; text-align: left;">
-                    <li style="font-size: 10px; color: #8b8fa8; margin-bottom: 4px;">• Real-time Voice</li>
-                    <li style="font-size: 10px; color: #8b8fa8; margin-bottom: 4px;">• Rich UI</li>
+                    <li style="font-size: 10px; color: #8b8fa8; margin-bottom: 4px;">• Express 2-day shipping</li>
+                    <li style="font-size: 10px; color: #8b8fa8; margin-bottom: 4px;">• 2-year warranty</li>
+                    <li style="font-size: 10px; color: #8b8fa8; margin-bottom: 4px;">• Accidental damage cover</li>
                   </ul>
                 </div>
                 <div style="background: rgba(0,0,0,0.2); border-radius: 8px; padding: 12px; text-align: center;">
-                  <div style="font-size: 11px; font-weight: 600; margin-bottom: 4px;">Scale</div>
-                  <div style="font-size: 18px; font-weight: 700; color: #4ecdc4; margin-bottom: 8px;">$99</div>
+                  <div style="font-size: 11px; font-weight: 600; margin-bottom: 4px;">Premium</div>
+                  <div style="font-size: 18px; font-weight: 700; color: #4ecdc4; margin-bottom: 8px;">$79</div>
                   <ul style="list-style: none; padding: 0; margin: 0; text-align: left;">
-                    <li style="font-size: 10px; color: #8b8fa8; margin-bottom: 4px;">• Custom Agents</li>
-                    <li style="font-size: 10px; color: #8b8fa8; margin-bottom: 4px;">• SSO</li>
+                    <li style="font-size: 10px; color: #8b8fa8; margin-bottom: 4px;">• Same-day shipping</li>
+                    <li style="font-size: 10px; color: #8b8fa8; margin-bottom: 4px;">• 3-year full warranty</li>
+                    <li style="font-size: 10px; color: #8b8fa8; margin-bottom: 4px;">• Priority support & replacements</li>
                   </ul>
                 </div>
-              </div>
-              <div style="margin-top: 12px;">
-                <button class="btn-demo secondary" style="width: 100%; pointer-events: auto;"
-                  onclick="document.getElementById('richDemo').style.display='none'">Dismiss Table</button>
               </div>
             </div>
           </div>
@@ -782,8 +786,7 @@
         style="padding: 100px 0; width: 100%; text-align: center; background: rgba(108, 99, 255, 0.03);">
         <div class="badge badge-red" style="margin-bottom: 12px;">Contact</div>
         <h3 style="font-size: 24px; margin-bottom: 16px;">Have a specific question?</h3>
-        <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto 32px;">Ask Nyx directly by clicking the
-          chat bubble, or use the form below.</p>
+        <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto 32px;">Need help choosing the right product? Chat with our assistant or drop us a message below.</p>
 
         <div
           style="max-width: 500px; margin: 0 auto; background: var(--surface2); border: 1px solid var(--border); border-radius: 12px; padding: 32px; text-align: left;">
@@ -890,14 +893,30 @@
           'Show me pricing plans',
           'Help me with this page',
         ],
-        tooltipText: 'Hi! 👋 I can help you explore this demo.',
+        tooltipText: 'Hi! 👋 Need help finding the right product?',
 
         // clientContext is sent as a 'client_init_config' event when the
         // WebSocket connects. The AI reads it silently and adapts accordingly.
         clientContext: {
           navigation_sections: ['top', 'home', 'pricing', 'contact_us', 'bottom'],
-          page_topic: 'Feature Demo — Avatar Chat Widget',
-          user_tier: 'Developer',
+          page_topic: 'TechVault — Premium Hardware & Gadgets Store',
+          store_name: 'TechVault',
+          available_products: [
+            { name: 'Nike AI Max', price: 120, sku: 'NK-AM-001', category: 'Footwear' },
+            { name: 'Sony WH-1000XM5', price: 349, sku: 'SN-WH-XM5', category: 'Audio' },
+            { name: 'Apple Watch Ultra', price: 799, sku: 'AP-WU-002', category: 'Wearables' },
+            { name: 'MacBook Pro M3', price: 1999, sku: 'AP-MBP-M3', category: 'Laptops' },
+            { name: 'Logitech MX Master 3S', price: 99, sku: 'LT-MX-3S', category: 'Peripherals' },
+            { name: 'Keychron Q6 Pro', price: 189, sku: 'KC-Q6-PRO', category: 'Peripherals' },
+            { name: 'iPad Pro M4', price: 999, sku: 'AP-IPAD-M4', category: 'Tablets' },
+            { name: 'Nintendo Switch OLED', price: 349, sku: 'NT-SW-OLED', category: 'Gaming' },
+            { name: 'Dyson Airwrap', price: 599, sku: 'DY-AIR-01', category: 'Personal Care' }
+          ],
+          shipping_plans: [
+            { tier: 'Standard', price: 'Free', features: ['Free shipping', '1-year warranty', '30-day returns'] },
+            { tier: 'Plus', price: '$29', features: ['Express 2-day shipping', '2-year warranty', 'Accidental damage cover'] },
+            { tier: 'Premium', price: '$79', features: ['Same-day shipping', '3-year full warranty', 'Priority support & replacements'] }
+          ]
         }
       });
 
@@ -1193,7 +1212,7 @@
     function markConnected() {
       if (!connDot) return;
       connDot.className = 'conn-dot connected';
-      connLabel.textContent = '● Connected to Nyx server';
+      connLabel.textContent = '● Connected to the server';
       connLabel.style.color = '#50c878';
     }
 
@@ -1250,7 +1269,7 @@
       card.addEventListener('click', () => {
         document.querySelectorAll('.product-card').forEach(c => c.classList.remove('active'));
         card.classList.add('active');
-        const data = { name: card.dataset.name, price: +card.dataset.price, sku: card.dataset.sku };
+        const data = { name: card.dataset.name, price: +card.dataset.price, sku: card.dataset.sku, category: card.dataset.category };
         
         // Show product details
         const detailsContainer = document.getElementById('product-details');
@@ -1264,18 +1283,19 @@
           if (viewer) {
             const modelPaths = {
               'NK-AM-001': 'asset/models/shoe.glb',
-              'SN-WH-XM5': 'asset/models/headphones.glb',
-              'AP-WU-002': 'asset/models/apple-watch-ultra.glb',
-              'AP-MBP-M3': 'asset/models/macbook-pro.glb',
-              'LT-MX-3S': 'asset/models/logitech-mouse.glb',
-              'KC-Q6-PRO': 'asset/models/keychron-keyboard.glb',
-              'AP-IPAD-M4': 'asset/models/ipad-pro.glb',
-              'NT-SW-OLED': 'asset/models/nintendo-switch.glb',
-              'DY-AIR-01': 'asset/models/dyson-airwrap.glb'
+              'SN-WH-XM5': 'asset/models/headphones.glb'
             };
-            // Fallback to the Nike shoe if the local asset hasn't been uploaded yet, to prevent a blank preview
-            viewer.src = modelPaths[data.sku] || 'asset/models/shoe.glb';
-            viewer.cameraOrbit = 'auto auto auto'; // Reset rotation orbit
+            const no3d = document.getElementById('no-3d-model');
+            const modelPath = modelPaths[data.sku];
+            if (modelPath) {
+              viewer.src = modelPath;
+              viewer.cameraOrbit = 'auto auto auto';
+              viewer.style.display = 'block';
+              if (no3d) no3d.style.display = 'none';
+            } else {
+              viewer.style.display = 'none';
+              if (no3d) no3d.style.display = 'flex';
+            }
           }
           detailsContainer.style.display = 'block';
           detailsContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -1309,23 +1329,23 @@
     // ── Sidebar buttons ───────────────────────────────────────────────────────
 
     // context: silent — AI does NOT respond, just stores the info
-    document.getElementById('btnContext').addEventListener('click', () => {
+    document.getElementById('btnContext')?.addEventListener('click', () => {
       widget.sendEvent('page_view', { url: window.location.href, title: document.title }, { directive: 'context' });
       logEvent('page_view', 'context');
     });
 
     // speak: AI SHOULD respond immediately — watch the widget!
-    document.getElementById('btnSpeak').addEventListener('click', () => {
+    document.getElementById('btnSpeak')?.addEventListener('click', () => {
       widget.sendEvent('promo_ended', { code: 'DEMO2026', discount: '20%' }, { directive: 'speak' });
       logEvent('promo_ended', 'speak ← AI should respond now');
     });
 
-    document.getElementById('btnPayFail').addEventListener('click', () => {
+    document.getElementById('btnPayFail')?.addEventListener('click', () => {
       widget.sendEvent('payment_failed', { reason: 'insufficient_funds', amount: 120.00 }, { directive: 'speak' });
       logEvent('payment_failed', 'speak ← AI should respond now');
     });
 
-    document.getElementById('btnLinkCard').addEventListener('click', () => {
+    document.getElementById('btnLinkCard')?.addEventListener('click', () => {
       // We instruct the AI directly via a system event to send us a link card.
       const instructions = "Send the user a send_rich_content card with content_type 'link_card'. Keep your spoken response brief like 'Here is the link you requested!'. payload_json MUST contain: title (MyNed AI), description (The future of conversational interfaces), url (https://myned.ai). Do NOT provide a thumbnail URL.";
       widget.sendEvent('send_link_card_demo', { instructions: instructions }, { directive: 'trigger' });
@@ -1333,7 +1353,7 @@
     });
 
     // Rich content — Now uses the actual triggerAction bridge!
-    document.getElementById('btnRichPricing').addEventListener('click', () => {
+    document.getElementById('btnRichPricing')?.addEventListener('click', () => {
       const payload = {
         plans: [
           { name: 'Basic', price: 'Free', features: ['Core AI', 'Web Chat'] },
@@ -1341,7 +1361,6 @@
           { name: 'Scale', price: '$99', features: ['Custom Agents', 'SSO'] }
         ]
       };
-      // Manually trigger the action as if the AI did it
       widget.triggerAction('send_rich_content', {
         item_id: 'pricing_demo_' + Date.now(),
         content_type: 'pricing_table',
@@ -1351,7 +1370,7 @@
       logEvent('send_rich_content', 'debug: price_table');
     });
 
-    document.getElementById('idRichSpotlight').addEventListener('click', () => {
+    document.getElementById('idRichSpotlight')?.addEventListener('click', () => {
       widget.triggerAction('send_rich_content', {
         item_id: 'spotlight_demo_' + Date.now(),
         content_type: 'product_spotlight',
@@ -1367,16 +1386,16 @@
     });
 
     // Confetti — fires locally, no server needed
-    document.getElementById('btnConfetti').addEventListener('click', () => {
+    document.getElementById('btnConfetti')?.addEventListener('click', () => {
       confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
       logEvent('trigger_confetti', 'action');
     });
 
-    document.getElementById('btnNavContact').addEventListener('click', () => {
+    document.getElementById('btnNavContact')?.addEventListener('click', () => {
       widget.triggerAction('navigate_to_section', { section_id: 'contact_us' });
       logEvent('navigate_to_section', 'debug: contact_us');
     });
-    document.getElementById('btnNavTop').addEventListener('click', () => {
+    document.getElementById('btnNavTop')?.addEventListener('click', () => {
       widget.triggerAction('navigate_to_section', { section_id: 'home' });
       logEvent('navigate_to_section', 'debug: home');
     });

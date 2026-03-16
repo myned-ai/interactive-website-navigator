@@ -72,8 +72,6 @@ class GeminiSettings(BaseSettings):
     # Default: UNSPECIFIED (Only Activity)
     gemini_turn_coverage: str = "TURN_INCLUDES_ALL_INPUT"
 
-    # --- Client Sync ---
-    gemini_transcript_speed: float = 15.0
 
 
 @lru_cache

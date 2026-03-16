@@ -30,6 +30,9 @@ export interface AvatarChatConfig {
   /** Enable/disable text input (default: true) */
   enableText?: boolean;
 
+  /** Enable/disable file upload attachment button (default: false) */
+  enableFileUpload?: boolean;
+
   /** Path to avatar model (default: uses included default avatar) */
   avatarUrl?: string;
 
@@ -153,6 +156,7 @@ export const DEFAULT_CONFIG: Partial<AvatarChatConfig> = {
   height: 550,
   enableVoice: true,
   enableText: true,
+  enableFileUpload: false,
   authEnabled: false,
   logLevel: 'error',
   suggestions: [
