@@ -31,8 +31,12 @@ services:
       - DEBUG_AUDIO_CAPTURE=${DEBUG_AUDIO_CAPTURE:-false}
       # Agent Configuration
       - AGENT_TYPE=${AGENT_TYPE:-sample_gemini}
-      # Gemini Configuration
+      # Gemini Configuration (local dev uses API key, not Vertex AI)
+      - GEMINI_USE_VERTEX=${GEMINI_USE_VERTEX:-false}
       - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - GEMINI_VERTEX_PROJECT=${GEMINI_VERTEX_PROJECT}
+      - GEMINI_VERTEX_LOCATION=${GEMINI_VERTEX_LOCATION:-us-central1}
+      - GEMINI_VERTEX_MODEL=${GEMINI_VERTEX_MODEL}
       - GEMINI_MODEL=${GEMINI_MODEL}
       - GEMINI_VOICE=${GEMINI_VOICE}
       - GEMINI_THINKING_BUDGET=${GEMINI_THINKING_BUDGET}
@@ -72,8 +76,12 @@ services:
       - DEBUG=true
       # Agent Configuration
       - AGENT_TYPE=${AGENT_TYPE:-sample_gemini}
-      # Gemini Configuration
+      # Gemini Configuration (local dev uses API key, not Vertex AI)
+      - GEMINI_USE_VERTEX=${GEMINI_USE_VERTEX:-false}
       - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - GEMINI_VERTEX_PROJECT=${GEMINI_VERTEX_PROJECT}
+      - GEMINI_VERTEX_LOCATION=${GEMINI_VERTEX_LOCATION:-us-central1}
+      - GEMINI_VERTEX_MODEL=${GEMINI_VERTEX_MODEL}
       - GEMINI_MODEL=${GEMINI_MODEL}
       - GEMINI_VOICE=${GEMINI_VOICE}
       - GEMINI_THINKING_BUDGET=${GEMINI_THINKING_BUDGET}
