@@ -17,49 +17,12 @@
 
 ## Quick Start
 
-### Script Tag (No Build Required)
-
-Add directly to any HTML page or website builder:
-
-```html
-<!-- Container for the widget -->
-<div id="avatar-chat"></div>
-
-<!-- Load from CDN -->
-<script src="https://cdn.jsdelivr.net/npm/@myned-ai/avatar-chat-widget"></script>
-
-<script>
-  AvatarChat.init({
-    container: '#avatar-chat',
-    serverUrl: 'wss://your-backend-server.com/ws',
-    position: 'bottom-right'
-  });
-</script>
-```
-
-### NPM Package
-
 ```bash
-npm install @myned-ai/avatar-chat-widget
+npm install
+npm run dev
 ```
 
-```typescript
-import { AvatarChat } from '@myned-ai/avatar-chat-widget';
-import '@myned-ai/avatar-chat-widget/style.css';
-
-const chat = AvatarChat.init({
-  container: '#avatar-chat',
-  serverUrl: 'wss://your-backend-server.com/ws',
-  onReady: () => console.log('Widget ready!'),
-  onMessage: (msg) => console.log('Message:', msg)
-});
-
-// Control programmatically
-chat.sendMessage('Hello!');
-chat.collapse(); // Minimize to bubble
-chat.expand();   // Open full widget
-chat.destroy();  // Cleanup
-```
+This starts the demo site (`index.html`) — a full-featured page with the avatar widget loaded locally from `./src/widget.ts`. Make sure the [server](../server/README.md) is running on `ws://localhost:8080/ws`.
 
 ---
 
@@ -160,18 +123,6 @@ AvatarChat.init({
 
 ---
 
-## Features
-
-- **Text & Voice Chat** - Real-time messaging with microphone streaming
-- **3D Avatar** - Gaussian Splatting rendering with 52 ARKit blendshapes
-- **Synchronized Animation** - Audio and facial expressions in perfect sync
-- **Auto-reconnection** - Resilient WebSocket with exponential backoff
-- **Shadow DOM** - Complete CSS isolation, no style conflicts
-- **Framework Agnostic** - Works with React, Vue, Angular, or vanilla HTML
-- **Accessible** - WCAG 2.1 AA compliant with ARIA labels
-
----
-
 ## WebSocket Protocol
 
 ### Client → Server
@@ -241,51 +192,16 @@ npm run build:lib
 ### Testing with Backend
 
 ```bash
-# Clone sample server
-git clone https://github.com/myned-ai/avatar-chat-server.git
-cd avatar-chat-server
+# From the repo root, start the server
+cd ../server
+cp .env.example .env
+# Edit .env: set GEMINI_USE_VERTEX=false, GEMINI_API_KEY, AUTH_ENABLED=false
 
-# Start with Docker
-docker-compose up
+# With Docker
+docker-compose up -d
+
+# Or without Docker
+uv sync && uv run python src/main.py
 ```
 
-Server runs on `ws://localhost:8765` by default.
-
-
----
-
-## Troubleshooting
-
-### Widget not loading
-- Check browser console for errors
-- Verify `serverUrl` is correct WebSocket URL (ws:// or wss://)
-- Ensure container element exists before calling `init()`
-
-### Avatar not rendering
-- Check server CORS headers (COEP/COOP)
-- Verify avatar ZIP file is accessible
-- Check `logLevel: 'debug'` for detailed logs
-
-### Voice not working
-- Microphone permission required
-- HTTPS required for production (getUserMedia)
-- Check browser compatibility
-
----
-
-## Acknowledgements
-
-Built on amazing open-source research:
-- [OpenLRM](https://github.com/3DTopia/OpenLRM)
-- [GAGAvatar](https://github.com/xg-chu/GAGAvatar)
-- [GaussianAvatars](https://github.com/ShenhanQian/GaussianAvatars)
-- [VHAP](https://github.com/ShenhanQian/VHAP)
-- [LAM](https://github.com/aigc3d/LAM)
-
-Thanks for their excellent works and great contribution.
-
----
-
-## License
-
-MIT License - see [LICENSE](LICENSE) for details.
+Server runs on `ws://localhost:8080/ws`. See [server/README.md](../server/README.md) for full setup details.

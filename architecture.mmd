@@ -1,0 +1,47 @@
+sequenceDiagram
+    participant U as User
+    participant C as Client Widget<br/>(Browser)
+    participant S as Server<br/>(Cloud Run)
+    participant G as Gemini Live API<br/>(Vertex AI)
+
+    Note over U,G: 1. Voice Conversation
+
+    U->>C: "Hey, what can you help me with?"
+    C->>S: Audio stream (WebSocket)
+    S->>G: Forward audio
+    G-->>S: "I can help you navigate this site..."
+    S->>S: Wav2Arkit ONNX (CPU)<br/>Audio → 52 Blendshapes
+    S-->>C: sync_frame (Audio + Blendshapes @ 30 FPS)
+    C->>U: Avatar speaks with lip-sync
+    U->>C: "Actually wait—"
+    C->>S: interrupt
+    S->>G: Cancel current response
+    G-->>S: (stops generating)
+
+    Note over U,G: 2. Screen Awareness
+
+    U->>C: "What do you see on my screen?"
+    C->>S: Audio stream
+    S->>G: Forward audio
+    G-->>S: tool_call: request_screen_context
+    S-->>C: Capture viewport
+    C->>C: html2canvas → screenshot
+    C->>S: Screenshot (base64)
+    S->>G: Image → Gemini Vision
+    G-->>S: "I can see a product listing page with sneakers..."
+    S-->>C: sync_frame (Audio + Blendshapes)
+    C->>U: Avatar describes the page
+
+    Note over U,G: 3. Action Taking
+
+    U->>C: "Find me the pricing section"
+    C->>S: Audio stream
+    S->>G: Forward audio
+    G-->>S: tool_call: navigate_to_section("pricing")
+    S-->>C: Scroll to #pricing
+    C->>C: Page scrolls to pricing section
+    G-->>S: "Here's the pricing section, let me show you a comparison..."
+    G-->>S: tool_call: send_rich_content(comparison table)
+    S-->>C: Render table in chat
+    S-->>C: sync_frame (Audio + Blendshapes)
+    C->>U: Avatar explains pricing with lip-sync
