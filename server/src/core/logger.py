@@ -1,5 +1,5 @@
 """
-Centralized logging configuration for avatar_chat_server.
+Centralized logging configuration for web_navigator_server.
 
 Provides a configured logger instance with appropriate formatting and levels
 optimized for realtime communication performance.

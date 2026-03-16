@@ -1,11 +1,11 @@
-# Avatar Chat Client Implementation Specification
+# Web Navigator Client Implementation Specification
 
 **Version:** 1.4
 **Date:** February 12, 2026
 **Target:** Client-Side Developers & AI Agents
 
 ## 1. Overview
-This document specifies the communication protocol and implementation requirements for a client connecting to the Avatar Chat Server. The server provides real-time conversational AI with specific orchestration for 3D Avatars (audio, blendshapes, transcripts) and handles server-side Voice Activity Detection (VAD) for interruptions. The server supports multiple backend agents (OpenAI, Gemini, or remote agents).
+This document specifies the communication protocol and implementation requirements for a client connecting to the Web Navigator Server. The server provides real-time conversational AI with specific orchestration for 3D Avatars (audio, blendshapes, transcripts) and handles server-side Voice Activity Detection (VAD) for interruptions. The server supports multiple backend agents (OpenAI, Gemini, or remote agents).
 
 ### 1.1 Transport
 - **Protocol:** WebSocket (WS/WSS)

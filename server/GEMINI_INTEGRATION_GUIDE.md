@@ -1,6 +1,6 @@
 # Gemini Live API Integration Guide
 
-This document outlines the specific configuration, constraints, and workarounds required to successfully integrate the Google Gemini Live API (`gemini-2.5-flash-native-audio-preview`) with the Avatar Chat Server.
+This document outlines the specific configuration, constraints, and workarounds required to successfully integrate the Google Gemini Live API (`gemini-2.5-flash-native-audio-preview`) with the Web Navigator Server.
 
 ## 1. API Version & SDK
 *   **Version**: `v1alpha` (Required by the current `google-genai` SDK for `send_realtime_input`).

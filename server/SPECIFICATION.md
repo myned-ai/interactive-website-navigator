@@ -1,7 +1,7 @@
-# Avatar Chat Server - Technical Specification
+# Web Navigator Server - Technical Specification
 
 ## 1. Overview
-The **Avatar Chat Server** is a real-time, bidirectional interaction backend designed to power 3D avatar interfaces. It acts as a bridge between a client (web/mobile) and conversational AI agents (OpenAI Realtime API, Google Gemini Live), adding a critical layer of **audio-to-facial-animation** synthesis.
+The **Web Navigator Server** is a real-time, bidirectional interaction backend designed to power 3D avatar interfaces. It acts as a bridge between a client (web/mobile) and conversational AI agents (OpenAI Realtime API, Google Gemini Live), adding a critical layer of **audio-to-facial-animation** synthesis.
 
 Key capability: transforming raw audio streams into synchronized ARKit blendshapes in real-time on CPU.
 

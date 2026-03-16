@@ -1,13 +1,13 @@
 # ==============================================================================
-# Avatar Chat Server - CPU-Only Dockerfile
+# Web Navigator Server - CPU-Only Dockerfile
 # ==============================================================================
 # Multi-stage build optimized for ONNX CPU inference.
 #
 # Build:
-#   docker build -t avatar-chat-server .
+#   docker build -t web-navigator-server .
 #
 # Run:
-#   docker run -p 8080:8080 --env-file .env avatar-chat-server
+#   docker run -p 8080:8080 --env-file .env web-navigator-server
 # ==============================================================================
 
 # ------------------------------------------------------------------------------

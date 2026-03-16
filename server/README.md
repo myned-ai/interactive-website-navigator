@@ -1,4 +1,4 @@
-# Avatar Chat Server
+# Web Navigator Server
 
 **Sample backend server for the [Avatar Chat Widget](https://github.com/myned-ai/avatar-chat-widget)**
 
@@ -84,8 +84,8 @@ powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | ie
 curl -LsSf https://astral.sh/uv/install.sh | sh
 
 # 2. Clone the repository
-git clone https://github.com/myned-ai/avatar-chat-server.git
-cd avatar-chat-server
+git clone https://github.com/myned-ai/web-navigator-server.git
+cd web-navigator-server
 
 # 3. Install dependencies
 uv sync
@@ -111,8 +111,8 @@ Server will start at `http://localhost:8080`
 
 ```bash
 # 1. Clone and configure
-git clone https://github.com/myned-ai/avatar-chat-server.git
-cd avatar-chat-server
+git clone https://github.com/myned-ai/web-navigator-server.git
+cd web-navigator-server
 cp .env.example .env
 # Edit .env with your settings
 
@@ -355,19 +355,19 @@ The Dockerfile uses a multi-stage build optimized for CPU-only production:
 
 ```bash
 # Build image
-docker build -t avatar-chat-server .
+docker build -t web-navigator-server .
 
 # Run (CPU-only)
 docker run -d \
-  --name avatar-chat-server \
+  --name web-navigator-server \
   -p 8080:8080 \
   --env-file .env \
   -v $(pwd)/src/pretrained_models:/app/pretrained_models:ro \
   --restart unless-stopped \
-  avatar-chat-server
+  web-navigator-server
 
 # View logs
-docker logs -f avatar-chat-server
+docker logs -f web-navigator-server
 
 # Health check
 curl http://localhost:8080/health
