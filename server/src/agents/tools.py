@@ -81,12 +81,13 @@ _CORE_GEMINI_ACTIONS = [
             "name": "request_screen_context",
             "description": (
                 "Request a screenshot of the user's current screen/viewport.\n"
-                "**Invocation Condition:** Invoke this tool *immediately* when the user asks about something "
-                "visually on their screen, such as 'What am I looking at?', 'Help me fill this form', "
-                "or 'What does this page show?'. You MUST invoke this tool without ANY conversational filler. "
-                "Do NOT say 'Let me look' or 'Sure'. Remain unmistakably silent and yield your turn. "
-                "Only answer after you receive the image attachment.\n"
-                "**EXCEPTION:** Do NOT invoke this tool if you already know what the user is looking at from recent system events (e.g. 'viewing_product')."
+                "**Invocation Condition:** Invoke this tool *only* when the user asks about something "
+                "visually on their screen AND you have NO product context from recent 'viewing_product' events. "
+                "Examples: 'Help me fill this form', 'What does this page show?'.\n"
+                "**IMPORTANT — CHECK CONTEXT FIRST:** Before calling this tool, review your conversation history for any recent "
+                "'viewing_product' system event. If you find one, DO NOT call this tool — answer using the product data you already have. "
+                "Only use this tool as a last resort when you truly have no context about what the user is looking at.\n"
+                "When you do invoke it: remain silent, do NOT say 'Let me look' or 'Sure'. Yield your turn and only answer after you receive the image."
             )
         }
     ]
