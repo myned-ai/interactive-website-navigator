@@ -18,7 +18,7 @@ services:
     build:
       context: .
       target: production
-    container_name: avatar-chat-server
+    container_name: interactive-website-navigator
     ports:
       - "${SERVER_PORT:-8080}:8080"
     environment:
@@ -43,9 +43,6 @@ services:
     volumes:
       # Mount Knowledge Base
       - ./data:/app/data
-      # Mount ONNX model (CPU-only)
-      - ./src/pretrained_models/wav2arkit_cpu.onnx:/app/pretrained_models/wav2arkit_cpu.onnx:ro
-      - ./src/pretrained_models/wav2arkit_cpu.onnx.data:/app/pretrained_models/wav2arkit_cpu.onnx.data:ro
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8080/health')"]
@@ -61,7 +58,7 @@ services:
     build:
       context: .
       target: development
-    container_name: avatar-chat-server-dev
+    container_name: interactive-website-navigator-dev
     profiles:
       - dev
     ports:
@@ -84,8 +81,6 @@ services:
       - GEMINI_PROACTIVE_AUDIO=${GEMINI_PROACTIVE_AUDIO}
       - GEMINI_CONTEXT_WINDOW_COMPRESSION=${GEMINI_CONTEXT_WINDOW_COMPRESSION}
       - KNOWLEDGE_BASE_SOURCE=${KNOWLEDGE_BASE_SOURCE:-none}
+    volumes:
       # Mount source code for hot reload
       - .:/app
-      # Mount ONNX model (CPU-only)
-      - ./src/pretrained_models/wav2arkit_cpu.onnx:/app/pretrained_models/wav2arkit_cpu.onnx:ro
-      - ./src/pretrained_models/wav2arkit_cpu.onnx.data:/app/pretrained_models/wav2arkit_cpu.onnx.data:ro

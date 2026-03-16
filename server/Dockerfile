@@ -66,14 +66,15 @@ RUN uv sync --frozen --no-dev || uv sync --no-dev \
 FROM dependencies AS production
 
 # Copy application code (already running as appuser)
+# pretrained_models/ already exists at /app/pretrained_models from stage 1
 COPY --chown=appuser:appuser ./src ./src
 COPY --chown=appuser:appuser ./data ./data
-RUN mv ./pretrained_models/ ./src/
 
 # Environment variables
 ENV SERVER_HOST=0.0.0.0 \
     SERVER_PORT=8080 \
-    PYTHONPATH=/app/src
+    PYTHONPATH=/app/src \
+    ONNX_MODEL_PATH=/app/pretrained_models/wav2arkit_cpu.onnx
 
 # Expose port
 EXPOSE 8080
@@ -91,8 +92,8 @@ CMD ["uv", "run", "--no-dev", "python", "src/main.py"]
 FROM dependencies AS development
 
 # Copy application code
+# pretrained_models/ already exists at /app/pretrained_models from stage 1
 COPY --chown=appuser:appuser ./src ./src
-RUN mv ./pretrained_models/ ./src/
 
 # Mount point for source code (overrides the COPY above when mounted)
 VOLUME ["/app"]
