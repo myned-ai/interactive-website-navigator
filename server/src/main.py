@@ -1,5 +1,5 @@
 """
-Avatar Chat Server
+Web Navigator Server
 
 FastAPI application for real-time voice-to-avatar interaction.
 Combines AI agents for voice conversation with Wav2Arkit
@@ -48,7 +48,7 @@ async def lifespan(app: FastAPI):
 
     # Startup
     logger.info("=" * 60)
-    logger.info("Avatar Chat Server Starting")
+    logger.info("Web Navigator Server Starting")
     logger.info("=" * 60)
     protocol = "wss" if settings.use_ssl else "ws"
     logger.info(f"WebSocket endpoint: {protocol}://{settings.server_host}:{settings.server_port}/ws")
@@ -72,7 +72,7 @@ async def lifespan(app: FastAPI):
 
 # Create FastAPI application
 app = FastAPI(
-    title="Avatar Chat Server",
+    title="Web Navigator Server",
     description="""
     Real-time voice-to-avatar interaction server.
     
@@ -163,7 +163,7 @@ async def root():
     """Root endpoint with server information."""
     settings = get_settings()
     response = {
-        "name": "Avatar Chat Server",
+        "name": "Web Navigator Server",
         "version": app.version,
         "status": "running",
     }

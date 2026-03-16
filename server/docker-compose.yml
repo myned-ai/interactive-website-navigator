@@ -1,5 +1,5 @@
 # ==============================================================================
-# Avatar Chat Server - Docker Compose Configuration
+# Web Navigator Server - Docker Compose Configuration
 # ==============================================================================
 #
 # Usage:
@@ -12,7 +12,7 @@
 
 services:
   # ============================================================================
-  # Avatar Chat Server (Production)
+  # Web Navigator Server (Production)
   # ============================================================================
   server:
     build:
@@ -52,7 +52,7 @@ services:
       start_period: 10s
 
   # ============================================================================
-  # Avatar Chat Server (Development with hot reload)
+  # Web Navigator Server (Development with hot reload)
   # ============================================================================
   server-dev:
     build:
